@@ -1,0 +1,123 @@
+---
+import '../styles/global.css'
+import Lightbox from '../components/Lightbox.astro'
+
+interface Props {
+  title?: string
+}
+
+const { title = 'Forside' } = Astro.props
+const nav = [
+  { href: '/', label: 'Forside' },
+  { href: '/galleri', label: 'Galleri' },
+  { href: '/om', label: 'Om' },
+  { href: '/kontakt', label: 'Kontakt' },
+]
+const currentPath = Astro.url.pathname
+---
+
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="First Blood Tattoo — Trond Kjørkleiv. Godt gammeldags håndverk av god kvalitet. Tatoveringsstudio i Sandnes." />
+    <title>{title} | First Blood Tattoo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Staatliches&family=Teko:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    #fb-img   { height: 8rem;  transform: translateY(-20px); }
+    #skull-img { transform: translate(20px, 12px); }
+    @media (min-width: 768px) {
+      #fb-img   { height: 20rem; transform: translateY(-83px); }
+      #skull-img { transform: translate(50px, 32px); }
+    }
+  </style>
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 border-b overflow-visible relative" style="background-image: url('/images/teppe.avif'); background-size: cover; background-position: center; border-color: var(--border);">
+      <!-- LOGO: posisjonert relativt til header (full bredde) -->
+      <a href="/" id="site-logo" class="absolute top-0 left-0 inline-block" style="z-index: 10;">
+        <img src="/images/logo.png"                alt=""            class="absolute inset-0 w-full h-full object-contain pointer-events-none" id="skull-img" />
+        <img src="/images/first%20blood%20tekst.png" alt="First Blood" class="relative w-auto drop-shadow-2xl"                                              id="fb-img" />
+      </a>
+
+      <div class="max-w-5xl mx-auto px-6 h-44 flex flex-row items-center justify-end">
+        <nav class="flex items-center relative">
+          <ul class="hidden md:flex items-center" style="font-family: 'Anton', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+            {nav.map(({ href, label }, i) => (
+              <>
+                {i > 0 && <span style="color: var(--accent); padding: 0 0.6rem; font-size: 1rem;">/</span>}
+                <li>
+                  <a
+                    href={href}
+                    class="cursor-pointer transition-colors duration-200"
+                    style="color: #F0EBE0;"
+                  >
+                    {label}
+                  </a>
+                </li>
+              </>
+            ))}
+          </ul>
+          <button id="menu-btn" class="md:hidden p-2 absolute right-0 flex flex-col gap-1.5" style="color: var(--text);" aria-label="Meny">
+            <span class="block h-0.5 w-6 bg-current"></span>
+            <span class="block h-0.5 w-4 bg-current"></span>
+            <span class="block h-0.5 w-5 bg-current"></span>
+          </button>
+        </nav>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden border-t" style="background-color: var(--bg); border-color: var(--border);">
+        <ul class="flex flex-col px-6 py-4 gap-4" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.12em; color: #e8f4f8;">
+          {nav.map(({ href, label }) => (
+            <li>
+              <a href={href} class="hover:text-[#F0EBE0] transition-colors">{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </header>
+
+    <Lightbox />
+
+    <main class="flex-1 pt-16 md:pt-0">
+      <slot />
+    </main>
+
+    <footer class="mt-20 border-t" style="background-color: #0A0A0A; border-color: var(--border);">
+      <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-6 text-sm" style="color: #888888;">
+        <div>
+          <p class="font-semibold mb-1" style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 0.08em;"><span style="color: var(--accent);">FIRST BLOOD</span> <span style="color: #F0EBE0;">TATTOO</span></p>
+          <p>Trond Kjørkleiv</p>
+          <p class="mt-1">Langgata 1B, 4306 Sandnes</p>
+          <p class="mt-1">Org.nr: 811 872 792</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <a href="tel:47315959" class="flex items-center gap-2 hover:text-[#F0EBE0] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11 19.79 19.79 0 0 1 1.62 2.38a2 2 0 0 1 1.79-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.46-.46a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            47 31 59 59
+          </a>
+          <a href="https://www.facebook.com/firstbloodtattoo" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-[#F0EBE0] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/megatrond9/" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-[#F0EBE0] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @megatrond9
+          </a>
+        </div>
+        <div class="self-end text-xs text-right space-y-1">
+          <p>© {new Date().getFullYear()} First Blood Tattoo</p>
+          <p>Laget av <a href="https://lilitlabs.com" target="_blank" rel="noopener" class="hover:text-[#F0EBE0] transition-colors underline underline-offset-2">Lilit Labs</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('menu-btn')
+      const menu = document.getElementById('mobile-menu')
+      btn?.addEventListener('click', () => menu?.classList.toggle('hidden'))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #C41E3A;
+  --bg: #0a1628;
+  --bg-secondary: #0d2a3e;
+  --border: #1a4a5e;
+  --text: #e8f4f8;
+  --muted: #7ab8cc;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #1C1C1C;
+    color: var(--text);
+    font-family: 'Teko', sans-serif;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.02em;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    letter-spacing: 0.05em;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+  }
+  h3 {
+    font-size: clamp(1.4rem, 3vw, 2.25rem);
+  }
+}

@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { allImages } from '../data/images'
+
+const categories = [
+  { id: 'alle',             label: 'Alle' },
+  { id: 'black-grey',       label: 'Black & Grey' },
+  { id: 'color',            label: 'Color' },
+  { id: 'cover-up',         label: 'Cover Up' },
+  { id: 'old-school',       label: 'Old School' },
+  { id: 'japanese',         label: 'Japanese' },
+  { id: 'neo-traditional',  label: 'Neo-Traditional' },
+  { id: 'realism',          label: 'Realism' },
+  { id: 'geometric',        label: 'Geometric' },
+  { id: 'mandala',          label: 'Mandala' },
+  { id: 'blackwork',        label: 'Blackwork' },
+  { id: 'new-school',       label: 'New School' },
+  { id: 'lettering',        label: 'Lettering' },
+]
+---
+
+<Layout title="Galleri">
+  <section class="max-w-5xl mx-auto px-4 md:px-6 py-10 md:py-16">
+    <div class="w-full mb-10 px-10 rounded-xl flex flex-col" style="background-color: #ffffff; font-family: 'Anton', sans-serif; min-height: 420px;">
+      <div class="flex items-center justify-center" style="flex: 0 0 38.2%;">
+        <h1 class="font-bold text-center" style="color: #111111; text-transform: uppercase;">Ink Work</h1>
+      </div>
+      <div style="height: 2px; background-color: #111111; margin-left: -2.5rem; margin-right: -2.5rem;"></div>
+      <!-- Bokhylle-filter -->
+      <div class="flex flex-1" id="filter-btns" style="margin-left: -2.5rem; margin-right: -2.5rem; background-color: #ffffff;">
+        {categories.map(({ id, label }, i) => (
+          <button
+            data-filter={id}
+            class="shelf-btn flex items-center justify-center cursor-pointer relative overflow-hidden"
+            style={`border-left: ${i > 0 ? '2px solid #111111' : 'none'}; background: transparent;`}
+          >
+            <span class="shelf-label" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+              <span class="shelf-text" style="font-family: 'Anton', sans-serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #888888; white-space: nowrap; writing-mode: vertical-rl; transform: rotate(180deg); transition: font-size 0.3s, color 0.3s, writing-mode 0.3s;">{label}</span>
+              <span class="velg-btn" style="font-family: 'Anton', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff; border: 1.5px solid #ffffff; padding: 0.3rem 1rem; white-space: nowrap; transition: background-color 0.2s, color 0.2s; display: none;">VELG</span>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <style>
+        .shelf-btn {
+          flex: 0 0 22px;
+          transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+        }
+        .shelf-btn.active {
+          flex: 0 0 36px !important;
+          background-color: #dddddd !important;
+        }
+        .shelf-btn.active .shelf-text {
+          color: #444444 !important;
+        }
+        .shelf-btn.preview, .shelf-btn.active.preview {
+          flex: 1 !important;
+          background-color: #111111 !important;
+        }
+        .shelf-btn.preview .shelf-text,
+        .shelf-btn.active.preview .shelf-text {
+          writing-mode: horizontal-tb !important;
+          transform: none !important;
+          font-size: 2rem !important;
+          color: #ffffff !important;
+        }
+        .shelf-btn.preview .velg-btn,
+        .shelf-btn.active.preview .velg-btn {
+          display: inline !important;
+        }
+        .velg-btn:hover {
+          background-color: #ffffff !important;
+          color: #111111 !important;
+        }
+      </style>
+    </div>
+
+    <!-- Masonry grid -->
+    <div class="columns-3 md:columns-4 lg:columns-5 gap-3 space-y-3" id="gallery-grid">
+      {allImages.map(({ id, src, alt, category }) => (
+        <div
+          data-category={category}
+          class="break-inside-avoid overflow-hidden rounded-lg gallery-item cursor-pointer"
+          onclick={`window.openLightbox('${id}')`}
+        >
+          <img
+            src={src}
+            alt={alt}
+            class="w-full object-cover hover:scale-105 transition-transform duration-500 rounded-lg"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('#filter-btns button')
+  const items = document.querySelectorAll<HTMLElement>('.gallery-item')
+
+  const btnArray = Array.from(btns)
+
+  let lastHoverIdx = -1
+  let browseDirection: 'left' | 'right' = 'right'
+
+  function pushSides(activeBtn: HTMLButtonElement | null, direction: 'left' | 'right') {
+    btnArray.forEach(b => b.style.marginLeft = '')
+    if (!activeBtn) return
+    const idx = btnArray.indexOf(activeBtn)
+
+    if (direction === 'right') {
+      // Came from left, active lands on right side
+      activeBtn.style.marginLeft = 'auto'
+    } else {
+      // Came from right, active lands on left side — push everything after to right
+      const firstRight = btnArray[idx + 1]
+      if (firstRight) firstRight.style.marginLeft = 'auto'
+    }
+  }
+
+  btnArray.forEach((btn, idx) => {
+    btn.addEventListener('mouseenter', () => {
+      if (lastHoverIdx !== -1 && idx !== lastHoverIdx) {
+        browseDirection = idx > lastHoverIdx ? 'right' : 'left'
+      }
+      lastHoverIdx = idx
+      btnArray.forEach(b => { if (b !== btn) b.classList.remove('preview') })
+      btn.classList.add('preview')
+      pushSides(btn, browseDirection)
+    })
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!
+      btnArray.forEach(b => b.classList.remove('active', 'preview'))
+      btn.classList.add('active')
+      // Slide to opposite side of browse direction
+      pushSides(btn, browseDirection === 'right' ? 'left' : 'right')
+      items.forEach(item => {
+        item.style.display = (filter === 'alle' || item.dataset.category === filter) ? '' : 'none'
+      })
+    })
+  })
+
+  const container = document.getElementById('filter-btns')
+  container?.addEventListener('mouseleave', () => {
+    btnArray.forEach(b => b.classList.remove('preview'))
+    const active = btnArray.find(b => b.classList.contains('active'))
+    pushSides(active ?? null, browseDirection)
+    lastHoverIdx = -1
+  })
+
+</script>

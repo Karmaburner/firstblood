@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Om">
+  <section class="max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-16">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+      <div>
+        <div class="overflow-hidden rounded-2xl aspect-[3/4] bg-stone-900 flex items-center justify-center">
+          <img
+            src="/images/trond.png"
+            alt="Trond Kjørkleiv — First Blood Tattoo"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'"
+          />
+        </div>
+      </div>
+      <div>
+        <img src="/images/first%20blood%20tekst%20alternativ.png" alt="First Blood" class="w-auto mb-2 -mx-8" style="height: 14rem;" />
+
+        <!-- Visittkort-kort -->
+        <div class="inline-block mb-8 p-6 border-2 relative overflow-hidden" style="background-color: #0A0A0A; border-color: var(--accent); min-width: 460px; min-height: 280px;">
+          <img src="/images/waves_transperent.png" alt="" class="absolute w-full pointer-events-none" style="opacity: 1; bottom: -40px; left: 0; z-index: 0;" />
+          <h1 class="font-bold relative mt-0" style="color: #C8BFB0; font-family: 'Staatliches', sans-serif; font-size: clamp(2.2rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 0.75; z-index: 1;">Tr<span style="color: #CC0000;">o</span>nd<br/>Kjørkleiv</h1>
+        </div>
+        <!-- Google rating + tagline -->
+        <div class="mb-6">
+          <p class="text-xs uppercase tracking-[0.25em] mb-2" style="color: var(--accent);">Sandnes · Siden 2007</p>
+          <p class="font-semibold mb-3" style="color: var(--text); font-family: 'Anton', sans-serif; font-size: 1.5rem;">Godt gammeldags håndverk</p>
+          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border" style="border-color: var(--border); background-color: var(--bg-secondary);">
+            <span class="flex gap-0.5" style="color: #F5A623;">
+              {'★★★★★'.split('').map(s => <span>{s}</span>)}
+            </span>
+            <span class="text-sm font-medium" style="color: var(--text);">4,9 / 5</span>
+            <span class="text-xs" style="color: var(--text);">30 Google-anmeldelser</span>
+          </div>
+        </div>
+
+        <div class="space-y-4 leading-relaxed" style="color: var(--text); font-size: 20px;">
+          <p>
+            First Blood Tattoo er et tatoveringsstudio i Sandnes, drevet av Trond Kjørkleiv.
+            Med mange år bak seg i bransjen har Trond bygget seg et solid rykte på godt håndverk,
+            ærlig kommunikasjon og lidenskap for kunsten.
+          </p>
+          <p>
+            Her handler det om gammeldags håndverk av god kvalitet og tradisjon.
+            Ingen unødvendige tilbud, ingen kompromisser på arbeid — bare tatoveringer
+            laget med omhu og stolthet.
+          </p>
+          <p>
+            Vi tatoverer. Ingenting annet.
+          </p>
+        </div>
+
+        <div class="mt-8 pt-8 border-t space-y-3" style="border-color: var(--border); font-size: 18px;">
+          <div class="flex items-center gap-3" style="color: var(--text);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Langgata 1B, 4306 Sandnes</span>
+          </div>
+          <div class="flex items-center gap-3" style="color: var(--text);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Mandag–lørdag kl. 10:00 — etter avtale</span>
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-col gap-2" style="font-size: 18px;">
+          <a href="tel:47315959" class="flex items-center gap-3 transition-colors hover:opacity-75" style="color: var(--text);">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background-color: var(--bg-secondary);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11 19.79 19.79 0 0 1 1.62 2.38a2 2 0 0 1 1.79-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.46-.46a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            47 31 59 59
+          </a>
+          <a href="https://www.facebook.com/firstbloodtattoo" target="_blank" rel="noopener" class="flex items-center gap-3 transition-colors hover:opacity-75" style="color: var(--text);">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background-color: var(--bg-secondary);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </span>
+            firstbloodtattoo
+          </a>
+          <a href="https://www.instagram.com/megatrond9/" target="_blank" rel="noopener" class="flex items-center gap-3 transition-colors hover:opacity-75" style="color: var(--text);">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background-color: var(--bg-secondary);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </span>
+            @megatrond9
+          </a>
+        </div>
+
+        <a href="/kontakt" class="inline-flex items-center gap-2 mt-8 text-white px-6 py-3 rounded-full font-medium hover:opacity-85 transition-opacity" style="background-color: var(--accent);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Ta kontakt
+        </a>
+
+        <!-- Linework by Trond -->
+        <div class="mt-12 pt-8 border-t rounded-2xl" style="border-color: var(--border);">
+          <p class="text-xs uppercase tracking-[0.25em] mb-2" style="color: var(--text);">Sideprosjekt</p>
+          <h3 class="font-semibold mb-3" style="color: var(--text); font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;">Linework by Trond</h3>
+          <p class="text-sm leading-relaxed mb-4" style="color: var(--text);">
+            Utenfor studio-arbeidet utforsker Trond håndtegnet kunst og linework — et kreativt sideprosjekt der pennen tar over fra nålen.
+          </p>
+          <a href="https://www.instagram.com/lineworkbytrond" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm transition-colors hover:opacity-75" style="color: var(--text);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @lineworkbytrond
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

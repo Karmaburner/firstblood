@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { allImages } from '../data/images'
+---
+
+<Layout title="Forside">
+
+  <!-- Alle bilder -->
+  <section class="py-4">
+    <div class="columns-3 md:columns-5 lg:columns-6 gap-2 space-y-2">
+      {allImages.map(({ id, src, alt }) => (
+        <div class="break-inside-avoid overflow-hidden rounded-lg cursor-pointer" onclick={`window.openLightbox('${id}')`}>
+          <img src={src} alt={alt} class="w-full object-cover hover:scale-105 transition-transform duration-500 rounded-lg" loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-14 px-6 text-center border-t" style="border-color: var(--border);">
+    <p class="mb-6" style="color: #F0EBE0; font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-style: italic; letter-spacing: 0.04em;">Ring eller send melding for timebestilling.</p>
+    <a href="/kontakt" style="background-color: var(--accent);" class="inline-flex items-center gap-2 text-white px-8 py-3 rounded-full font-medium hover:opacity-85 transition-opacity">
+      Ta kontakt
+    </a>
+  </section>
+
+</Layout>

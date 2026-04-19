@@ -1,0 +1,81 @@
+---
+import { allImages } from '../data/images'
+---
+
+<div id="lightbox" class="fixed inset-0 z-[100] bg-black/97 hidden items-center justify-center" role="dialog" aria-modal="true">
+
+  <button id="lb-close" class="absolute top-4 right-4 text-white/60 hover:text-white text-3xl font-light z-10 cursor-pointer transition-colors w-10 h-10 flex items-center justify-center">✕</button>
+
+  <button id="lb-prev" class="absolute left-1 md:left-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-4xl md:text-5xl z-10 cursor-pointer transition-colors select-none px-2 py-4">‹</button>
+
+  <div class="flex flex-col w-full max-w-5xl mx-auto px-8 md:px-20 py-14 items-center justify-center h-full overflow-y-auto">
+    <div class="flex items-center justify-center w-full">
+      <img id="lb-img" src="" alt="" class="max-h-[80vh] max-w-full object-contain shadow-2xl" />
+    </div>
+  </div>
+
+  <button id="lb-next" class="absolute right-1 md:right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-4xl md:text-5xl z-10 cursor-pointer transition-colors select-none px-2 py-4">›</button>
+
+</div>
+
+<script define:vars={{ allImages }}>
+  const lb = document.getElementById('lightbox')
+  const lbImg = document.getElementById('lb-img')
+  const lbClose = document.getElementById('lb-close')
+  const lbPrev = document.getElementById('lb-prev')
+  const lbNext = document.getElementById('lb-next')
+
+  let sequence = [...allImages].sort(() => Math.random() - 0.5)
+  let currentIndex = 0
+
+  function openLightbox(imageId) {
+    const idx = sequence.findIndex(img => img.id === imageId)
+    if (idx !== -1) currentIndex = idx
+    else {
+      const img = allImages.find(i => i.id === imageId)
+      if (img) { sequence.unshift(img); currentIndex = 0 }
+    }
+    showCurrent()
+    lb.classList.remove('hidden')
+    lb.classList.add('flex')
+    document.body.style.overflow = 'hidden'
+  }
+
+  function closeLightbox() {
+    lb.classList.add('hidden')
+    lb.classList.remove('flex')
+    document.body.style.overflow = ''
+  }
+
+  function showCurrent() {
+    const img = sequence[currentIndex]
+    if (!img) return
+    lbImg.src = img.src
+    lbImg.alt = img.alt
+  }
+
+  lbClose.addEventListener('click', closeLightbox)
+  lbPrev.addEventListener('click', () => { currentIndex = (currentIndex - 1 + sequence.length) % sequence.length; showCurrent() })
+  lbNext.addEventListener('click', () => { currentIndex = (currentIndex + 1) % sequence.length; showCurrent() })
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox() })
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeLightbox()
+      if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + sequence.length) % sequence.length; showCurrent() }
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % sequence.length; showCurrent() }
+    }
+  })
+
+  let touchStartX = 0
+  lb.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX }, { passive: true })
+  lb.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) { currentIndex = (currentIndex + 1) % sequence.length }
+      else { currentIndex = (currentIndex - 1 + sequence.length) % sequence.length }
+      showCurrent()
+    }
+  })
+
+  window.openLightbox = openLightbox
+</script>
