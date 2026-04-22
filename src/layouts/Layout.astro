@@ -44,29 +44,14 @@ const currentPath = Astro.url.pathname
       </a>
 
       <div class="max-w-5xl mx-auto px-6 h-44 flex flex-row items-center justify-end">
-        <nav class="flex items-center relative">
-          <ul class="hidden md:flex items-center" style="font-family: 'Anton', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase;">
-            {nav.map(({ href, label }, i) => (
-              <>
-                {i > 0 && <span style="color: var(--accent); padding: 0 0.6rem; font-size: 1rem;">/</span>}
-                <li>
-                  <a
-                    href={href}
-                    class="cursor-pointer transition-colors duration-200"
-                    style="color: #F0EBE0;"
-                  >
-                    {label}
-                  </a>
-                </li>
-              </>
-            ))}
-          </ul>
-          <button id="menu-btn" class="md:hidden p-2 absolute right-0 flex flex-col gap-1.5" style="color: var(--text);" aria-label="Meny">
-            <span class="block h-0.5 w-6 bg-current"></span>
-            <span class="block h-0.5 w-4 bg-current"></span>
-            <span class="block h-0.5 w-5 bg-current"></span>
-          </button>
-        </nav>
+        <a href="/meny" class="hidden md:block" style="position: absolute; right: 1.5rem;">
+          <img src="/images/hanko_transperent.png" alt="Ta kontakt" style="width: 130px; height: 130px; object-fit: contain; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'" />
+        </a>
+        <button id="menu-btn" class="md:hidden p-2 flex flex-col gap-1.5" style="color: var(--text);" aria-label="Meny">
+          <span class="block h-0.5 w-6 bg-current"></span>
+          <span class="block h-0.5 w-4 bg-current"></span>
+          <span class="block h-0.5 w-5 bg-current"></span>
+        </button>
       </div>
       <div id="mobile-menu" class="hidden md:hidden border-t" style="background-color: var(--bg); border-color: var(--border);">
         <ul class="flex flex-col px-6 py-4 gap-4" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.12em; color: #e8f4f8;">
@@ -80,6 +65,7 @@ const currentPath = Astro.url.pathname
     </header>
 
     <Lightbox />
+    <div id="texture-overlay"></div>
 
     <main class="flex-1 pt-16 md:pt-0">
       <slot />
@@ -119,5 +105,6 @@ const currentPath = Astro.url.pathname
       const menu = document.getElementById('mobile-menu')
       btn?.addEventListener('click', () => menu?.classList.toggle('hidden'))
     </script>
+
   </body>
 </html>
