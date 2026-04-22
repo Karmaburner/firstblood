@@ -27,30 +27,39 @@ const currentPath = Astro.url.pathname
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Staatliches&family=Teko:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    #fb-img   { height: 8rem;  transform: translateY(-20px); }
-    #skull-img { transform: translate(20px, 12px); }
+    #fb-img   { height: 6rem;  transform: translateY(-15px); }
+    #skull-img { transform: translate(15px, 10px); }
     @media (min-width: 768px) {
-      #fb-img   { height: 20rem; transform: translateY(-83px); }
-      #skull-img { transform: translate(50px, 32px); }
+      #fb-img   { height: 15rem; transform: translateY(-60px); }
+      #skull-img { transform: translate(38px, 24px); }
     }
   </style>
   </head>
   <body class="flex flex-col min-h-screen">
-    <header class="sticky top-0 z-50 border-b overflow-visible relative" style="background-image: url('/images/teppe.avif'); background-size: cover; background-position: center; border-color: var(--border);">
+    <header class="sticky top-0 z-50 border-b overflow-visible relative" style="background-image: linear-gradient(to right, #000000 60%, rgba(28,28,28,0.92) 90%, rgba(28,28,28,0.88) 100%), url('/images/teppe.avif'); background-size: cover; background-position: center; border-color: var(--border);">
       <!-- LOGO: posisjonert relativt til header (full bredde) -->
-      <a href="/" id="site-logo" class="absolute top-0 left-0 inline-block" style="z-index: 10;">
+      <a href="/" id="site-logo" class="absolute top-0 inline-block" style="z-index: 10; left: calc(8px + 10vw); transform: translateX(-50%);">
         <img src="/images/logo.png"                alt=""            class="absolute inset-0 w-full h-full object-contain pointer-events-none" id="skull-img" />
         <img src="/images/first%20blood%20tekst.png" alt="First Blood" class="relative w-auto drop-shadow-2xl"                                              id="fb-img" />
       </a>
 
       <div class="max-w-5xl mx-auto px-6 h-44 flex flex-row items-center justify-end">
-        <a href="/meny" class="hidden md:block" style="position: absolute; right: 1.5rem;">
-          <img src="/images/hanko_transperent.png" alt="Ta kontakt" style="width: 130px; height: 130px; object-fit: contain; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'" />
+        <a href="/kontakt" class="hidden md:inline-flex items-center px-5 py-2 rounded-full font-medium text-sm transition-opacity hover:opacity-80" style="position: absolute; right: 9rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.12em; background-color: #CC3300; color: #ffffff;">Kontakt</a>
+        <a href="/meny" class="hidden md:flex flex-col gap-1.5 p-2" style="position: absolute; right: 1.5rem; color: var(--text); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+          <svg width="64" height="64" viewBox="0 0 28 28" fill="currentColor">
+            <rect x="3" y="3" width="10" height="10" rx="2"/>
+            <rect x="15" y="3" width="10" height="10" rx="2"/>
+            <rect x="3" y="15" width="10" height="10" rx="2"/>
+            <rect x="15" y="15" width="10" height="10" rx="2"/>
+          </svg>
         </a>
-        <button id="menu-btn" class="md:hidden p-2 flex flex-col gap-1.5" style="color: var(--text);" aria-label="Meny">
-          <span class="block h-0.5 w-6 bg-current"></span>
-          <span class="block h-0.5 w-4 bg-current"></span>
-          <span class="block h-0.5 w-5 bg-current"></span>
+        <button id="menu-btn" class="md:hidden p-2" style="color: var(--text);" aria-label="Meny">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor">
+            <rect x="2" y="2" width="8" height="8" rx="1.5"/>
+            <rect x="12" y="2" width="8" height="8" rx="1.5"/>
+            <rect x="2" y="12" width="8" height="8" rx="1.5"/>
+            <rect x="12" y="12" width="8" height="8" rx="1.5"/>
+          </svg>
         </button>
       </div>
       <div id="mobile-menu" class="hidden md:hidden border-t" style="background-color: var(--bg); border-color: var(--border);">
@@ -105,6 +114,7 @@ const currentPath = Astro.url.pathname
       const menu = document.getElementById('mobile-menu')
       btn?.addEventListener('click', () => menu?.classList.toggle('hidden'))
     </script>
+
 
   </body>
 </html>

@@ -20,22 +20,22 @@ const categories = [
 ---
 
 <Layout title="Galleri">
-  <section class="max-w-5xl mx-auto px-4 md:px-6 py-10 md:py-16">
-    <div class="w-full mb-10 px-10 rounded-xl flex flex-col" style="background-color: #ffffff; font-family: 'Anton', sans-serif; min-height: 420px;">
-      <div class="flex items-center justify-center" style="flex: 0 0 38.2%;">
-        <h1 class="font-bold text-center" style="color: #111111; text-transform: uppercase;">Ink Work</h1>
+  <section class="px-4 md:px-6 py-10 md:py-16">
+    <div class="w-full mb-10 rounded-xl flex flex-col overflow-hidden" style="background-color: #111111; font-family: 'Anton', sans-serif; min-height: 580px;">
+      <div class="flex items-center justify-center px-10" style="flex: 0 0 38.2%;">
+        <h1 class="font-bold text-center" style="color: #ffffff; text-transform: uppercase;">Ink Work</h1>
       </div>
-      <div style="height: 2px; background-color: #111111; margin-left: -2.5rem; margin-right: -2.5rem;"></div>
+      <div style="height: 2px; background-color: #ffffff;"></div>
       <!-- Bokhylle-filter -->
-      <div class="flex flex-1" id="filter-btns" style="margin-left: -2.5rem; margin-right: -2.5rem; background-color: #ffffff;">
+      <div class="flex flex-1" id="filter-btns" style="background-color: #111111;">
         {categories.map(({ id, label }, i) => (
           <button
             data-filter={id}
             class="shelf-btn flex items-center justify-center cursor-pointer relative overflow-hidden"
-            style={`border-left: ${i > 0 ? '2px solid #111111' : 'none'}; background: transparent;`}
+            style={`border-left: 2px solid #ffffff; border-right: ${i === 0 || i === categories.length - 1 ? '2px solid #ffffff' : 'none'}; background: transparent;`}
           >
             <span class="shelf-label" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
-              <span class="shelf-text" style="font-family: 'Anton', sans-serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #888888; white-space: nowrap; writing-mode: vertical-rl; transform: rotate(180deg); transition: font-size 0.3s, color 0.3s, writing-mode 0.3s;">{label}</span>
+              <span class="shelf-text" style="font-family: 'Anton', sans-serif; font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: #aaaaaa; white-space: nowrap; writing-mode: vertical-rl; transform: rotate(180deg); transition: font-size 0.3s, color 0.3s, writing-mode 0.3s;">{label}</span>
               <span class="velg-btn" style="font-family: 'Anton', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff; border: 1.5px solid #ffffff; padding: 0.3rem 1rem; white-space: nowrap; transition: background-color 0.2s, color 0.2s; display: none;">VELG</span>
             </span>
           </button>
@@ -44,15 +44,15 @@ const categories = [
 
       <style>
         .shelf-btn {
-          flex: 0 0 22px;
+          flex: 0 0 55px;
           transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
         }
         .shelf-btn.active {
           flex: 0 0 36px !important;
-          background-color: #dddddd !important;
+          background-color: #2a2a2a !important;
         }
         .shelf-btn.active .shelf-text {
-          color: #444444 !important;
+          color: #ffffff !important;
         }
         .shelf-btn.preview, .shelf-btn.active.preview {
           flex: 1 !important;
@@ -77,7 +77,7 @@ const categories = [
     </div>
 
     <!-- Masonry grid -->
-    <div class="columns-3 md:columns-4 lg:columns-5 gap-3 space-y-3" id="gallery-grid">
+    <div class="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3" id="gallery-grid">
       {allImages.map(({ id, src, alt, category }) => (
         <div
           data-category={category}
@@ -104,6 +104,9 @@ const categories = [
 
   let lastHoverIdx = -1
   let browseDirection: 'left' | 'right' = 'right'
+  let activeDirection: 'left' | 'right' = 'right'
+  let lastHoveredBtn: HTMLButtonElement | null = null
+  let lastHoverDirection: 'left' | 'right' = 'right'
 
   function pushSides(activeBtn: HTMLButtonElement | null, direction: 'left' | 'right') {
     btnArray.forEach(b => b.style.marginLeft = '')
@@ -126,16 +129,19 @@ const categories = [
         browseDirection = idx > lastHoverIdx ? 'right' : 'left'
       }
       lastHoverIdx = idx
+      lastHoveredBtn = btn
+      lastHoverDirection = browseDirection
       btnArray.forEach(b => { if (b !== btn) b.classList.remove('preview') })
       btn.classList.add('preview')
       pushSides(btn, browseDirection)
     })
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter!
+      const clickDir: 'left' | 'right' = browseDirection === 'right' ? 'left' : 'right'
+      activeDirection = clickDir
       btnArray.forEach(b => b.classList.remove('active', 'preview'))
       btn.classList.add('active')
-      // Slide to opposite side of browse direction
-      pushSides(btn, browseDirection === 'right' ? 'left' : 'right')
+      pushSides(btn, clickDir)
       items.forEach(item => {
         item.style.display = (filter === 'alle' || item.dataset.category === filter) ? '' : 'none'
       })
@@ -146,7 +152,11 @@ const categories = [
   container?.addEventListener('mouseleave', () => {
     btnArray.forEach(b => b.classList.remove('preview'))
     const active = btnArray.find(b => b.classList.contains('active'))
-    pushSides(active ?? null, browseDirection)
+    if (active) {
+      pushSides(active, activeDirection)
+    } else if (lastHoveredBtn) {
+      pushSides(lastHoveredBtn, lastHoverDirection)
+    }
     lastHoverIdx = -1
   })
 

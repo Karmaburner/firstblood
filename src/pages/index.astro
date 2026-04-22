@@ -1,198 +1,38 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { allImages } from '../data/images'
-
-const categories = [
-  { id: 'alle',            label: 'Alle' },
-  { id: 'black-grey',      label: 'Black & Grey' },
-  { id: 'color',           label: 'Color' },
-  { id: 'cover-up',        label: 'Cover Up' },
-  { id: 'old-school',      label: 'Old School' },
-  { id: 'japanese',        label: 'Japanese' },
-  { id: 'neo-traditional', label: 'Neo-Traditional' },
-  { id: 'realism',         label: 'Realism' },
-  { id: 'geometric',       label: 'Geometric' },
-  { id: 'mandala',         label: 'Mandala' },
-  { id: 'blackwork',       label: 'Blackwork' },
-  { id: 'new-school',      label: 'New School' },
-  { id: 'lettering',       label: 'Lettering' },
-]
-
-const col1 = allImages.filter((_, i) => i % 4 === 0)
-const col2 = allImages.filter((_, i) => i % 4 === 1)
-const col3 = allImages.filter((_, i) => i % 4 === 2)
-const col4 = allImages.filter((_, i) => i % 4 === 3)
 ---
 
 <Layout title="Forside">
 
-  <div class="flex">
-
-    <!-- Venstre: vertikal nav -->
-    <div id="shelf-nav" class="hidden md:flex flex-col" style="width: 15vw; min-width: 120px; background-color: #1c1c1c; flex-shrink: 0; height: 100vh; overflow: hidden;">
-      {[
-        ...Array.from({ length: 6 }).map(() => ({ href: null, label: null })),
-        { href: '/',        label: 'Forside' },
-        { href: null,       label: null },
-        { href: '/galleri', label: 'Galleri' },
-        { href: null,       label: null },
-        { href: '/om',      label: 'Om' },
-        { href: null,       label: null },
-        { href: '/kontakt', label: 'Kontakt' },
-        ...Array.from({ length: 7 }).map(() => ({ href: null, label: null })),
-      ].map(({ href, label }, i) => (
-        <div
-          class="shelf-v-btn flex flex-col items-center justify-center overflow-hidden cursor-pointer"
-          data-href={href ?? ''}
-          style={`border-top: ${i > 0 ? '1px solid #333' : 'none'}; background: transparent; width: 100%;`}
-        >
-          {label && (
-            <span class="shelf-v-label" style="font-family: 'Anton', sans-serif; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #aaaaaa; white-space: nowrap; transition: color 0.2s, font-size 0.2s;">
-              {label}
-            </span>
-            <img src="/images/hanko_transperent.png" class="shelf-v-hanko" alt="" style="width: 72px; height: 72px; object-fit: contain; margin-top: 1rem; display: none; transition: opacity 0.3s;" />
-          )}
-        </div>
-      ))}
+  <div style="position: relative; min-height: 100vh; overflow: visible; display: flex; align-items: center; justify-content: center;">
+    <img
+      src="/images/waves_transperent.png"
+      alt=""
+      aria-hidden="true"
+      style="position: absolute; left: 0; top: calc(20% + 100px); bottom: 0; width: auto; max-width: 50%; height: 80%; object-fit: contain; object-position: top left; opacity: 0.18; pointer-events: none; user-select: none; z-index: 0; mask-image: linear-gradient(to left, transparent 0%, black 40%); -webkit-mask-image: linear-gradient(to left, transparent 0%, black 40%);"
+    />
+    <!-- Hero logo -->
+    <div style="position: relative; z-index: 60; display: inline-block; text-align: center; transform: translateY(-320px);">
+      <img src="/images/logo.png" alt="" style="position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: contain; pointer-events: none; transform: translate(-50%, -65%) scale(0.7);" />
+      <img src="/images/firstbloodtexttransparent.png" alt="First Blood Tattoo" style="position: relative; height: 40rem; width: auto; filter: drop-shadow(0 8px 40px rgba(0,0,0,0.9)); transform: translateY(-310px);" />
     </div>
 
-    <!-- Tre bildekolonner -->
-    <div class="flex flex-1 gap-1 p-1" id="image-grid">
-      <div class="flex flex-col gap-1 flex-1" id="col-1">
-        {col1.map(({ id, src, alt, category }) => (
-          <div class="gallery-item overflow-hidden cursor-pointer" data-category={category} onclick={`window.openLightbox('${id}')`}>
-            <img src={src} alt={alt} class="w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
-          </div>
-        ))}
-      </div>
-      <div class="flex flex-col gap-1 flex-1" id="col-2">
-        {col2.map(({ id, src, alt, category }) => (
-          <div class="gallery-item overflow-hidden cursor-pointer" data-category={category} onclick={`window.openLightbox('${id}')`}>
-            <img src={src} alt={alt} class="w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
-          </div>
-        ))}
-      </div>
-      <div class="flex flex-col gap-1 flex-1" id="col-3">
-        {col3.map(({ id, src, alt, category }) => (
-          <div class="gallery-item overflow-hidden cursor-pointer" data-category={category} onclick={`window.openLightbox('${id}')`}>
-            <img src={src} alt={alt} class="w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
-          </div>
-        ))}
-      </div>
-      <div class="flex flex-col gap-1 flex-1" id="col-4">
-        {col4.map(({ id, src, alt, category }) => (
-          <div class="gallery-item overflow-hidden cursor-pointer" data-category={category} onclick={`window.openLightbox('${id}')`}>
-            <img src={src} alt={alt} class="w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
-          </div>
-        ))}
-      </div>
-    </div>
-
+    <img
+      src="/images/trond.png"
+      alt=""
+      aria-hidden="true"
+      style="position: absolute; right: 0; top: 0; height: 75%; width: auto; object-fit: contain; object-position: top right; opacity: 0.08; pointer-events: none; user-select: none; z-index: 1; mask-image: linear-gradient(to right, transparent 0%, black 40%), linear-gradient(to bottom, black 50%, transparent 100%); mask-composite: intersect; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%), linear-gradient(to bottom, black 50%, transparent 100%); -webkit-mask-composite: source-in;"
+    />
   </div>
 
-  <!-- CTA -->
-  <section class="py-14 px-6 text-center border-t" style="border-color: var(--border);">
-    <p class="mb-6" style="color: #F0EBE0; font-family: 'Anton', sans-serif; font-size: clamp(1.6rem, 3.5vw, 2.8rem); letter-spacing: 0.06em; text-transform: uppercase;">Ring eller send melding f<span style="color: var(--accent);">o</span>r timebestilling.</p>
-    <a href="/kontakt" style="background-color: var(--accent);" class="inline-flex items-center gap-2 text-white px-8 py-3 rounded-full font-medium hover:opacity-85 transition-opacity">
-      Ta kontakt
-    </a>
-  </section>
+  <!-- Full-width gallery -->
+  <div class="columns-2 md:columns-3 lg:columns-5 gap-1 space-y-1 w-full">
+    {allImages.map(({ id, src, alt }) => (
+      <div class="break-inside-avoid overflow-hidden cursor-pointer" onclick={`window.openLightbox('${id}')`}>
+        <img src={src} alt={alt} class="w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+      </div>
+    ))}
+  </div>
 
 </Layout>
-
-<style>
-  .shelf-v-btn {
-    flex: 0 0 22px;
-    transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
-  }
-  .shelf-v-btn.active {
-    flex: 0 0 36px;
-    background-color: #2e2e2e !important;
-  }
-  .shelf-v-btn.active .shelf-v-label {
-    color: #aaaaaa !important;
-  }
-  .shelf-v-btn.preview {
-    flex: 1 !important;
-    background-color: #111111 !important;
-  }
-  .shelf-v-btn.preview .shelf-v-label {
-    color: #ffffff !important;
-    font-size: 1rem !important;
-  }
-  .shelf-v-btn.preview .shelf-v-hanko {
-    display: block !important;
-  }
-  .velg-v {
-    display: none;
-    font-family: 'Anton', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #ffffff;
-    border: 1.5px solid #ffffff;
-    padding: 0.25rem 0.6rem;
-    white-space: nowrap;
-    margin-top: 0.5rem;
-    transition: background-color 0.2s, color 0.2s;
-  }
-  .shelf-v-btn.preview .velg-v {
-    display: block;
-  }
-  .velg-v:hover {
-    background-color: #ffffff !important;
-    color: #111111 !important;
-  }
-</style>
-
-<script>
-  const btns = document.querySelectorAll<HTMLElement>('.shelf-v-btn')
-  const btnArray = Array.from(btns)
-
-  let lastHoverIdx = -1
-  let browseDirection: 'up' | 'down' = 'down'
-  let activeBtn: HTMLElement | null = null
-
-  function pushSides(btn: HTMLElement | null, direction: 'up' | 'down') {
-    btnArray.forEach(b => (b as HTMLElement).style.marginTop = '')
-    if (!btn) return
-    const idx = btnArray.indexOf(btn)
-    if (direction === 'down') {
-      (btn as HTMLElement).style.marginTop = 'auto'
-    } else {
-      const firstBelow = btnArray[idx + 1] as HTMLElement | undefined
-      if (firstBelow) firstBelow.style.marginTop = 'auto'
-    }
-  }
-
-  btnArray.forEach((btn, idx) => {
-    btn.addEventListener('mouseenter', () => {
-      if (lastHoverIdx !== -1 && idx !== lastHoverIdx) {
-        browseDirection = idx > lastHoverIdx ? 'down' : 'up'
-      }
-      lastHoverIdx = idx
-      btnArray.forEach(b => { if (b !== btn) b.classList.remove('preview') })
-      btn.classList.add('preview')
-      pushSides(btn, browseDirection)
-    })
-
-    btn.addEventListener('click', () => {
-      const href = btn.dataset.href
-      if (!href) return
-      const clickDirection: 'up' | 'down' = browseDirection === 'down' ? 'up' : 'down'
-      btnArray.forEach(b => b.classList.remove('active', 'preview'))
-      btn.classList.add('active')
-      activeBtn = btn
-      pushSides(btn, clickDirection)
-      window.location.href = href
-    })
-  })
-
-  const container = document.getElementById('shelf-nav')
-  container?.addEventListener('mouseleave', () => {
-    btnArray.forEach(b => b.classList.remove('preview'))
-    const activeBtnAfterLeave = browseDirection === 'down' ? 'up' : 'down'
-    pushSides(activeBtn, activeBtnAfterLeave)
-    lastHoverIdx = -1
-  })
-</script>
