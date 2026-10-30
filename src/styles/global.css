@@ -7,6 +7,7 @@
   --knapp: #C89B42;          /* knappefarge: Vintage oker */
   --knapp-tekst: #000000;
   --knapp-hover: #D6AD5C;
+  --knapp-hjorne: 6px;       /* lett avrundede hjørner på alle knapper */
   --ikon: #A9A9A9;          /* nøytrale ikoner */
   --bg: #0a1628;
   --bg-secondary: #0d2a3e;

@@ -2,162 +2,158 @@
 import Layout from '../layouts/Layout.astro'
 import { allImages } from '../data/images'
 
-const categories = [
-  { id: 'alle',             label: 'Alle' },
-  { id: 'black-grey',       label: 'Black & Grey' },
-  { id: 'color',            label: 'Color' },
-  { id: 'cover-up',         label: 'Cover Up' },
-  { id: 'old-school',       label: 'Old School' },
-  { id: 'japanese',         label: 'Japanese' },
-  { id: 'neo-traditional',  label: 'Neo-Traditional' },
-  { id: 'realism',          label: 'Realism' },
-  { id: 'geometric',        label: 'Geometric' },
-  { id: 'mandala',          label: 'Mandala' },
-  { id: 'blackwork',        label: 'Blackwork' },
-  { id: 'new-school',       label: 'New School' },
-  { id: 'lettering',        label: 'Lettering' },
+const alleKategorier = [
+  { id: 'black-grey', label: 'Black & Grey' },
+  { id: 'color', label: 'Color' },
+  { id: 'cover-up', label: 'Cover Up' },
+  { id: 'old-school', label: 'Old School' },
+  { id: 'japanese', label: 'Japanese' },
+  { id: 'neo-traditional', label: 'Neo-Traditional' },
+  { id: 'realism', label: 'Realism' },
+  { id: 'geometric', label: 'Geometric' },
+  { id: 'mandala', label: 'Mandala' },
+  { id: 'blackwork', label: 'Blackwork' },
+  { id: 'new-school', label: 'New School' },
+  { id: 'lettering', label: 'Lettering' },
+]
+// Vis bare kategorier som har bilder. Får Trond flere stilarter, dukker de opp av seg selv.
+const kategorier = [
+  { id: 'alle', label: 'Alle', antall: allImages.length },
+  ...alleKategorier
+    .map((k) => ({ ...k, antall: allImages.filter((b) => b.category === k.id).length }))
+    .filter((k) => k.antall > 0),
 ]
 ---
 
 <Layout title="Galleri" description="Se tatoveringer fra First Blood Tattoo i Sandnes: farger, black and grey, cover-up og mer.">
-  <section class="px-4 md:px-6 py-10 md:py-16">
-    <div class="w-full mb-10 rounded-xl flex flex-col overflow-hidden" style="background-color: #111111; font-family: var(--font-overskrift); font-weight: 900; min-height: 580px;">
-      <div class="flex items-center justify-center px-10" style="flex: 0 0 38.2%;">
-        <h1 class="font-bold text-center" style="color: #ffffff; text-transform: uppercase;">Ink Work</h1>
-      </div>
-      <div style="height: 2px; background-color: #ffffff;"></div>
-      <!-- Bokhylle-filter -->
-      <div class="flex flex-1" id="filter-btns" style="background-color: #111111;">
-        {categories.map(({ id, label }, i) => (
-          <button
-            data-filter={id}
-            class="shelf-btn flex items-center justify-center cursor-pointer relative overflow-hidden"
-            style={`border-left: 2px solid #ffffff; border-right: ${i === 0 || i === categories.length - 1 ? '2px solid #ffffff' : 'none'}; background: transparent;`}
-          >
-            <span class="shelf-label" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
-              <span class="shelf-text" style="font-family: var(--font-overskrift); font-weight: 900; font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: #aaaaaa; white-space: nowrap; writing-mode: vertical-rl; transform: rotate(180deg); transition: font-size 0.3s, color 0.3s, writing-mode 0.3s;">{label}</span>
-              <span class="velg-btn" style="font-family: var(--font-overskrift); font-weight: 900; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff; border: 1.5px solid #ffffff; padding: 0.3rem 1rem; white-space: nowrap; transition: background-color 0.2s, color 0.2s; display: none;">VELG</span>
-            </span>
-          </button>
-        ))}
-      </div>
+  <section class="galleri">
+    <header class="galleri-topp">
+      <p class="etikett">Galleri</p>
+      <h1>Ink work</h1>
+    </header>
 
-      <style>
-        .shelf-btn {
-          flex: 0 0 55px;
-          transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
-        }
-        .shelf-btn.active {
-          flex: 0 0 36px !important;
-          background-color: #2a2a2a !important;
-        }
-        .shelf-btn.active .shelf-text {
-          color: #ffffff !important;
-        }
-        .shelf-btn.preview, .shelf-btn.active.preview {
-          flex: 1 !important;
-          background-color: #111111 !important;
-        }
-        .shelf-btn.preview .shelf-text,
-        .shelf-btn.active.preview .shelf-text {
-          writing-mode: horizontal-tb !important;
-          transform: none !important;
-          font-size: 2rem !important;
-          color: #ffffff !important;
-        }
-        .shelf-btn.preview .velg-btn,
-        .shelf-btn.active.preview .velg-btn {
-          display: inline !important;
-        }
-        .velg-btn:hover {
-          background-color: #ffffff !important;
-          color: #111111 !important;
-        }
-      </style>
+    <!-- Bokhylle (datamaskin) -->
+    <div class="hylle" role="group" aria-label="Velg stilart">
+      {kategorier.map(({ id, label, antall }, i) => (
+        <button type="button" class:list={['rygg', { aktiv: i === 0 }]} data-filter={id} aria-pressed={i === 0 ? 'true' : 'false'}>
+          <span class="rygg-tekst">{label}</span>
+          <span class="rygg-antall">{antall} bilder</span>
+        </button>
+      ))}
     </div>
 
-    <!-- Masonry grid -->
-    <div class="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3" id="gallery-grid">
+    <!-- Knapper (mobil) -->
+    <div class="brikker" role="group" aria-label="Velg stilart">
+      {kategorier.map(({ id, label, antall }, i) => (
+        <button type="button" class="brikke" data-filter={id} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {label} <span class="brikke-antall">{antall}</span>
+        </button>
+      ))}
+    </div>
+
+    <p class="antall-vist" role="status" aria-live="polite"></p>
+
+    <div class="rutenett">
       {allImages.map(({ id, thumb, alt, category }) => (
-        <div
-          data-category={category}
-          class="break-inside-avoid overflow-hidden rounded-lg gallery-item cursor-pointer"
-          onclick={`window.openLightbox('${id}')`}
-        >
-          <img
-            src={thumb}
-            alt={alt}
-            class="w-full object-cover hover:scale-105 transition-transform duration-500 rounded-lg"
-            loading="lazy"
-          />
-        </div>
+        <button type="button" class="bilde" data-category={category} aria-label={`Vis større: ${alt}`} onclick={`window.openLightbox('${id}')`}>
+          <img src={thumb} alt="" loading="lazy" decoding="async" />
+        </button>
       ))}
     </div>
   </section>
 </Layout>
 
+<style>
+  .galleri { padding: 2.5rem 0 4rem; }
+  .galleri-topp, .hylle, .brikker, .antall-vist { margin-inline: 1.25rem; }
+  @media (min-width: 768px) {
+    .galleri { padding-top: 4rem; }
+    .galleri-topp, .hylle, .brikker, .antall-vist { margin-inline: 2rem; }
+  }
+  .etikett {
+    font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
+    font-size: 1.125rem; letter-spacing: 0.25em; color: var(--muted);
+  }
+  h1 { margin-top: 0.4rem; line-height: 0.95; font-weight: 900; color: #F0EBE0; }
+
+  /* Bokhylle: smale rygger med loddrett tekst, den aktive eller den du peker på folder seg ut */
+  .hylle { display: none; height: 12.5rem; margin-top: 2rem; border: 2px solid #F0EBE0; }
+  @media (min-width: 768px) { .hylle { display: flex; } }
+  .rygg {
+    flex: 0 0 4rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;
+    background: #111; color: #C8BFB0; border: 0; border-right: 2px solid #F0EBE0; cursor: pointer;
+    transition: flex 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
+  }
+  .rygg:last-child { border-right: 0; }
+  .rygg-tekst {
+    font-family: var(--font-overskrift); font-weight: 800; text-transform: uppercase;
+    font-size: 1.125rem; letter-spacing: 0.15em; white-space: nowrap;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+  }
+  .rygg-antall { display: none; font-size: 1rem; color: #A9A9A9; }
+  .rygg.aktiv, .rygg:hover, .rygg:focus-visible { flex: 1; background: #000; }
+  .rygg.aktiv .rygg-tekst, .rygg:hover .rygg-tekst, .rygg:focus-visible .rygg-tekst {
+    writing-mode: horizontal-tb; transform: none; font-size: 2.25rem; color: #F0EBE0;
+  }
+  .rygg.aktiv .rygg-antall, .rygg:hover .rygg-antall, .rygg:focus-visible .rygg-antall { display: block; }
+  /* Når du peker på en annen rygg, folder den aktive seg sammen igjen */
+  .hylle:hover .rygg.aktiv:not(:hover) { flex: 0 0 4rem; background: #1e1e1e; }
+  .hylle:hover .rygg.aktiv:not(:hover) .rygg-tekst { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 1.125rem; }
+  .hylle:hover .rygg.aktiv:not(:hover) .rygg-antall { display: none; }
+  .rygg:focus-visible { outline: 3px solid var(--knapp); outline-offset: -5px; }
+  @media (prefers-reduced-motion: reduce) { .rygg { transition: none; } }
+
+  /* Knapper */
+  .brikker { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  @media (min-width: 768px) { .brikker { display: none; } }
+  .brikke {
+    min-height: 44px; padding: 0.55rem 1rem 0.4rem; cursor: pointer;
+    font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase; font-size: 1.125rem; letter-spacing: 0.1em;
+    color: #F0EBE0; background: transparent; border: 2px solid #6b6b6b; border-radius: var(--knapp-hjorne);
+  }
+  .brikke:hover { border-color: #F0EBE0; }
+  .brikke[aria-pressed='true'] { background: #F0EBE0; color: #000; border-color: #F0EBE0; }
+  .brikke-antall { opacity: 0.7; margin-left: 0.25rem; }
+  .brikke:focus-visible { outline: 3px solid var(--knapp); outline-offset: 2px; }
+
+
+  .antall-vist { margin-top: 1rem; margin-bottom: 1rem; font-size: 1.125rem; color: #A9A9A9; }
+
+  /* Bildene kant i kant, uten avrunding */
+  .rutenett { columns: 2; column-gap: 4px; }
+  @media (min-width: 768px) { .rutenett { columns: 3; } }
+  @media (min-width: 1200px) { .rutenett { columns: 4; } }
+  .bilde {
+    display: block; width: 100%; margin: 0 0 4px; padding: 0; border: 0; background: #111;
+    break-inside: avoid; overflow: hidden; cursor: zoom-in;
+  }
+  .bilde img { display: block; width: 100%; height: auto; transition: transform 0.5s; }
+  .bilde:hover img { transform: scale(1.04); }
+  .bilde:focus-visible { outline: 3px solid var(--knapp); outline-offset: -3px; }
+  .bilde[hidden] { display: none; }
+  @media (prefers-reduced-motion: reduce) { .bilde img { transition: none; } .bilde:hover img { transform: none; } }
+</style>
+
 <script>
-  const btns = document.querySelectorAll<HTMLButtonElement>('#filter-btns button')
-  const items = document.querySelectorAll<HTMLElement>('.gallery-item')
+  const knapper = document.querySelectorAll<HTMLButtonElement>('[data-filter]')
+  const bilder = document.querySelectorAll<HTMLButtonElement>('.bilde')
+  const status = document.querySelector('.antall-vist')!
 
-  const btnArray = Array.from(btns)
-
-  let lastHoverIdx = -1
-  let browseDirection: 'left' | 'right' = 'right'
-  let activeDirection: 'left' | 'right' = 'right'
-  let lastHoveredBtn: HTMLButtonElement | null = null
-  let lastHoverDirection: 'left' | 'right' = 'right'
-
-  function pushSides(activeBtn: HTMLButtonElement | null, direction: 'left' | 'right') {
-    btnArray.forEach(b => b.style.marginLeft = '')
-    if (!activeBtn) return
-    const idx = btnArray.indexOf(activeBtn)
-
-    if (direction === 'right') {
-      // Came from left, active lands on right side
-      activeBtn.style.marginLeft = 'auto'
-    } else {
-      // Came from right, active lands on left side — push everything after to right
-      const firstRight = btnArray[idx + 1]
-      if (firstRight) firstRight.style.marginLeft = 'auto'
-    }
+  function velg(filter: string) {
+    let vist = 0
+    bilder.forEach((b) => {
+      const synlig = filter === 'alle' || b.dataset.category === filter
+      b.hidden = !synlig
+      if (synlig) vist++
+    })
+    knapper.forEach((k) => {
+      const valgt = k.dataset.filter === filter
+      k.setAttribute('aria-pressed', String(valgt))
+      k.classList.toggle('aktiv', valgt)
+    })
+    status.textContent = `Viser ${vist} ${vist === 1 ? 'bilde' : 'bilder'}`
   }
 
-  btnArray.forEach((btn, idx) => {
-    btn.addEventListener('mouseenter', () => {
-      if (lastHoverIdx !== -1 && idx !== lastHoverIdx) {
-        browseDirection = idx > lastHoverIdx ? 'right' : 'left'
-      }
-      lastHoverIdx = idx
-      lastHoveredBtn = btn
-      lastHoverDirection = browseDirection
-      btnArray.forEach(b => { if (b !== btn) b.classList.remove('preview') })
-      btn.classList.add('preview')
-      pushSides(btn, browseDirection)
-    })
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter!
-      const clickDir: 'left' | 'right' = browseDirection === 'right' ? 'left' : 'right'
-      activeDirection = clickDir
-      btnArray.forEach(b => b.classList.remove('active', 'preview'))
-      btn.classList.add('active')
-      pushSides(btn, clickDir)
-      items.forEach(item => {
-        item.style.display = (filter === 'alle' || item.dataset.category === filter) ? '' : 'none'
-      })
-    })
-  })
-
-  const container = document.getElementById('filter-btns')
-  container?.addEventListener('mouseleave', () => {
-    btnArray.forEach(b => b.classList.remove('preview'))
-    const active = btnArray.find(b => b.classList.contains('active'))
-    if (active) {
-      pushSides(active, activeDirection)
-    } else if (lastHoveredBtn) {
-      pushSides(lastHoveredBtn, lastHoverDirection)
-    }
-    lastHoverIdx = -1
-  })
-
+  knapper.forEach((k) => k.addEventListener('click', () => velg(k.dataset.filter!)))
+  velg('alle')
 </script>
