@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* Fontene ligger på egen server (SIL Open Font License), så siden ikke venter på Google Fonts.
+   Bare det latinske settet, som dekker æ, ø og å. */
+@font-face { font-family: 'Big Shoulders Display'; font-style: normal; font-weight: 600 900; font-display: swap; src: url('/fonts/big-shoulders-display-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/barlow-400-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/barlow-500-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/barlow-600-latin.woff2') format('woff2'); }
+
+
 :root {
   --font-overskrift: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
   --accent: #F80008;        /* rødfargen i logoen */
@@ -69,7 +77,7 @@
   background-image:
     linear-gradient(to right, rgba(28,28,28,0.88) 0%, rgba(28,28,28,0.92) 10%, #000 35%, #000 60%, rgba(28,28,28,0.92) 90%, rgba(28,28,28,0.88) 100%),
     url('/images/teppe.avif');
-  background-size: 100% 100%, auto;
+  background-size: 100% 100%, 1920px auto;
   background-position: center top;
   background-repeat: no-repeat, repeat-x;
   -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);

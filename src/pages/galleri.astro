@@ -55,9 +55,9 @@ const kategorier = [
     <p class="antall-vist" role="status" aria-live="polite"></p>
 
     <div class="rutenett">
-      {allImages.map(({ id, thumb, alt, category }) => (
+      {allImages.map(({ id, thumb, alt, category, w, h }) => (
         <button type="button" class="bilde" data-category={category} aria-label={`Vis større: ${alt}`} onclick={`window.openLightbox('${id}')`}>
-          <img src={thumb} alt="" loading="lazy" decoding="async" />
+          <img src={thumb} width={w} height={h} alt="" loading="lazy" decoding="async" />
         </button>
       ))}
     </div>

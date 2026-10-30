@@ -20,7 +20,7 @@ import { allImages } from '../data/images'
       </div>
     </div>
     <figure class="hero-bilde">
-      <img src={u('/images/trond-frilagt.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="1400" height="1050" fetchpriority="high" />
+      <img src={u('/images/trond-frilagt.avif')} srcset={`${u('/images/trond-frilagt-800.avif')} 800w, ${u('/images/trond-frilagt.avif')} 1400w`} sizes="(min-width: 900px) 45vw, 100vw" alt="Trond Kjørkleiv med solbriller og sigar" width="1400" height="1050" fetchpriority="high" />
     </figure>
   </section>
   <a href="#arbeider" class="rull-ned" aria-label="Se arbeidene">
@@ -30,9 +30,9 @@ import { allImages } from '../data/images'
 
   <!-- Full-width gallery -->
   <div id="arbeider" class="columns-2 md:columns-3 lg:columns-5 gap-1 space-y-1 w-full">
-    {allImages.map(({ id, thumb, alt }) => (
+    {allImages.map(({ id, thumb, alt, w, h }) => (
       <button type="button" class="block w-full p-0 border-0 bg-transparent break-inside-avoid overflow-hidden cursor-zoom-in focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--knapp)]" aria-label={`Vis større: ${alt}`} onclick={`window.openLightbox('${id}')`}>
-        <img src={thumb} alt="" class="block w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+        <img src={thumb} width={w} height={h} alt="" class="block w-full h-auto object-cover hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
       </button>
     ))}
   </div>

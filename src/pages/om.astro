@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro'
   <div class="side-bakgrunn">
   <section class="om">
     <figure class="om-bilde">
-      <img src={u("/images/trond-frilagt.avif")} alt="Trond Kjørkleiv med solbriller og sigar" width="1400" height="1050" />
+      <img src={u("/images/trond-frilagt.avif")} srcset={`${u("/images/trond-frilagt-800.avif")} 800w, ${u("/images/trond-frilagt.avif")} 1400w`} sizes="(min-width: 900px) 40vw, 100vw" alt="Trond Kjørkleiv med solbriller og sigar" width="1400" height="1050" />
     </figure>
 
     <div class="om-tekst">
