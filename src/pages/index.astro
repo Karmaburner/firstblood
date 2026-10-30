@@ -13,7 +13,7 @@ import { allImages } from '../data/images'
     <div class="hero-tekst">
       <p class="hero-etikett">Tatoveringsstudio · Sandnes</p>
       <h1 class="hero-tittel">Vi tatoverer.<br /><span>Ingenting annet.</span></h1>
-      <p class="hero-ingress">Trond Kjørkleiv. Godt gammeldags håndverk av god kvalitet.</p>
+      <p class="hero-ingress">Godt gammeldags håndverk, tatovert av Trond&nbsp;Kjørkleiv.</p>
       <div class="hero-knapper">
         <a href={u('/galleri')} class="knapp knapp-hoved">Se tatoveringer</a>
         <a href={u('/kontakt')} class="knapp knapp-kant">Ta kontakt</a>
@@ -110,6 +110,7 @@ import { allImages } from '../data/images'
   /* Andre linje mindre: «Vi tatoverer.» er hovedbudskapet, «Ingenting annet.» er punchlinen */
   .hero-tittel span { display: inline-block; margin-top: 0.15em; font-size: 0.55em; letter-spacing: 0.04em; color: var(--accent); }
   .hero-ingress {
+    text-wrap: balance;
     font-size: 1.375rem;
     line-height: 1.4;
     color: #C8BFB0;
