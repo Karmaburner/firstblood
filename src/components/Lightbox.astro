@@ -2,11 +2,11 @@
 import { allImages } from '../data/images'
 ---
 
-<div id="lightbox" class="fixed inset-0 z-[100] bg-black/97 hidden items-center justify-center" role="dialog" aria-modal="true">
+<div id="lightbox" class="fixed inset-0 z-[100] bg-black/97 hidden items-center justify-center" role="dialog" aria-modal="true" aria-label="Bilde i stort format">
 
-  <button id="lb-close" class="absolute top-4 right-4 text-white/60 hover:text-white text-3xl font-light z-10 cursor-pointer transition-colors w-10 h-10 flex items-center justify-center">✕</button>
+  <button type="button" id="lb-close" aria-label="Lukk bildet" class="absolute top-4 right-4 text-white/60 hover:text-white text-3xl font-light z-10 cursor-pointer transition-colors w-10 h-10 flex items-center justify-center">✕</button>
 
-  <button id="lb-prev" class="absolute left-1 md:left-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-4xl md:text-5xl z-10 cursor-pointer transition-colors select-none px-2 py-4">‹</button>
+  <button type="button" id="lb-prev" aria-label="Forrige bilde" class="absolute left-1 md:left-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-4xl md:text-5xl z-10 cursor-pointer transition-colors select-none px-2 py-4">‹</button>
 
   <div class="flex flex-col w-full max-w-5xl mx-auto px-8 md:px-20 py-14 items-center justify-center h-full overflow-y-auto">
     <div class="flex items-center justify-center w-full">
@@ -14,7 +14,7 @@ import { allImages } from '../data/images'
     </div>
   </div>
 
-  <button id="lb-next" class="absolute right-1 md:right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-4xl md:text-5xl z-10 cursor-pointer transition-colors select-none px-2 py-4">›</button>
+  <button type="button" id="lb-next" aria-label="Neste bilde" class="absolute right-1 md:right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-4xl md:text-5xl z-10 cursor-pointer transition-colors select-none px-2 py-4">›</button>
 
 </div>
 
@@ -36,15 +36,21 @@ import { allImages } from '../data/images'
       if (img) { sequence.unshift(img); currentIndex = 0 }
     }
     showCurrent()
+    forrigeFokus = document.activeElement
     lb.classList.remove('hidden')
     lb.classList.add('flex')
     document.body.style.overflow = 'hidden'
+    lbClose.focus()
   }
+
+  // Tastaturfokus: til lukkeknappen når lysboksen åpnes, tilbake til bildet når den lukkes
+  let forrigeFokus = null
 
   function closeLightbox() {
     lb.classList.add('hidden')
     lb.classList.remove('flex')
     document.body.style.overflow = ''
+    if (forrigeFokus && forrigeFokus.focus) forrigeFokus.focus()
   }
 
   function showCurrent() {
