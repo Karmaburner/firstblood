@@ -3,6 +3,7 @@
 :root {
   --font-overskrift: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
   --accent: #F80008;        /* rødfargen i logoen */
+  --font-tekst: 'Barlow', system-ui, sans-serif;
   --knapp: #E2A93B;          /* knappefarge: oker, som i gamle tatoveringsflash */
   --knapp-tekst: #000000;
   --knapp-hover: #F0BE5A;
@@ -35,7 +36,7 @@
     position: relative;
     background: linear-gradient(to right, #000000 60%, #1C1C1C 90%);
     color: var(--text);
-    font-family: 'Teko', sans-serif;
+    font-family: var(--font-tekst);
   }
   h1, h2, h3, h4 {
     font-family: var(--font-overskrift); font-weight: 800;
