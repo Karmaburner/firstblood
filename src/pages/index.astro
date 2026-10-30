@@ -20,7 +20,7 @@ import { allImages } from '../data/images'
       </div>
     </div>
     <figure class="hero-bilde">
-      <img src={u('/images/trond.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="760" height="956" fetchpriority="high" />
+      <img src={u('/images/trond.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="1024" height="1280" fetchpriority="high" />
     </figure>
   </section>
   <a href="#arbeider" class="rull-ned" aria-label="Se arbeidene">
@@ -160,14 +160,5 @@ import { allImages } from '../data/images'
     display: block;
     width: 100%;
     height: auto;
-    filter: brightness(0.92) contrast(1.05);
-  }
-  /* Demper den lyse veggen bak Trond mot kantene, så bildet ikke lyser mer enn overskriften */
-  .hero-bilde::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse 75% 70% at 50% 62%, transparent 45%, rgba(0,0,0,0.55) 100%);
   }
 </style>
