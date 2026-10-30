@@ -2,11 +2,9 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-// GitHub Pages: siden ligger på karmaburner.github.io/firstblood/.
-// Får Trond eget domene, sett site til domenet og fjern base.
+// Siden ligger på firstblood.no (GitHub Pages med eget domene, se public/CNAME).
 export default defineConfig({
-  site: 'https://karmaburner.github.io',
-  base: '/firstblood',
+  site: 'https://firstblood.no',
   vite: {
     plugins: [tailwindcss()]
   }
