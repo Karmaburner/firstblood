@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Kart from '../components/Kart.astro'
 
 // Skjemaet sendes via Web3Forms (web3forms.com). Nøkkelen hentes gratis der,
 // med e-postadressen meldingene skal til. Står den tom, viser skjemaet telefonnummeret i stedet.
@@ -89,6 +90,12 @@ const WEB3FORMS_NOKKEL = ''
         </form>
       </div>
     </div>
+
+    <section class="finn-fram" aria-labelledby="finn-fram-tittel">
+      <h2 id="finn-fram-tittel">Finn fram</h2>
+      <p class="finn-fram-tekst">Studioet ligger i Langgata 1B, midt i Sandnes sentrum.</p>
+      <Kart />
+    </section>
   </section>
 </Layout>
 
@@ -121,6 +128,9 @@ const WEB3FORMS_NOKKEL = ''
   a.info-verdi { text-decoration: underline; text-decoration-color: rgba(240,235,224,0.35); text-underline-offset: 4px; }
   a.info-verdi:hover { text-decoration-color: #F0EBE0; }
   a.info-verdi:focus-visible, .send:focus-visible { outline: 3px solid #F0EBE0; outline-offset: 3px; }
+
+  .finn-fram { margin-top: 4rem; }
+  .finn-fram-tekst { font-size: 1.25rem; color: #E4DED2; margin: -0.5rem 0 1.25rem; }
 
   .skjema { display: grid; gap: 1.25rem; }
   .felt label {

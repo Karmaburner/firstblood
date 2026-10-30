@@ -1,0 +1,101 @@
+---
+// Kart over studioet. MapLibre lastes først når kartet nærmer seg skjermen,
+// så det ikke gjør resten av siden tregere.
+const veibeskrivelse = 'https://www.google.com/maps/dir/?api=1&destination=Langgata+1B%2C+4306+Sandnes'
+---
+<div class="kart-ramme">
+  <div id="kart" class="kart" role="region" aria-label="Kart som viser at studioet ligger i Langgata 1B i Sandnes sentrum">
+    <p class="kart-reserve">Langgata 1B, 4306 Sandnes</p>
+  </div>
+  <a class="veibeskrivelse" href={veibeskrivelse} target="_blank" rel="noopener">Få veibeskrivelse i Google Maps</a>
+</div>
+
+<style>
+  .kart-ramme { display: grid; gap: 1rem; }
+  .kart {
+    position: relative; width: 100%; height: 22rem; background: #4d6059;
+    border: 1px solid #3a3a3a;
+  }
+  @media (min-width: 768px) { .kart { height: 28rem; } }
+  .kart-reserve {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 1.125rem; color: #F0EBE0;
+  }
+  .veibeskrivelse {
+    justify-self: start; font-size: 1.125rem; color: #F0EBE0;
+    text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(240,235,224,0.4);
+  }
+  .veibeskrivelse:hover { text-decoration-color: #F0EBE0; }
+  .veibeskrivelse:focus-visible { outline: 3px solid #F0EBE0; outline-offset: 3px; }
+
+  /* Nålen og navnet på studioet */
+  :global(.kart-nal) { display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+  :global(.kart-nal-navn) {
+    font-family: var(--font-overskrift); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+    font-size: 1rem; line-height: 1; color: #000; background: var(--knapp);
+    padding: 0.4rem 0.6rem 0.3rem; margin-bottom: 0.25rem; white-space: nowrap;
+  }
+  /* Kontrollene til MapLibre i sidens farger */
+  :global(.kart .maplibregl-ctrl-group) { background: #111; border: 1px solid #555; border-radius: 0; }
+  :global(.kart .maplibregl-ctrl-group button) { width: 40px; height: 40px; }
+  :global(.kart .maplibregl-ctrl-group button + button) { border-top: 1px solid #555; }
+  :global(.kart .maplibregl-ctrl-icon) { filter: invert(1); }
+  :global(.kart .maplibregl-ctrl.maplibregl-ctrl-attrib),
+  :global(.kart .maplibregl-ctrl.maplibregl-ctrl-attrib.maplibregl-compact) { background: rgba(0,0,0,0.85); color: #E4DED2; font-size: 0.875rem; }
+  :global(.kart .maplibregl-ctrl-attrib a) { color: #F0EBE0; }
+  :global(.kart .maplibregl-ctrl-attrib-button) { background-color: #F0EBE0; border-radius: 50%; }
+  :global(.kart .maplibregl-cooperative-gesture-screen) { font-family: var(--font-tekst); font-size: 1.125rem; }
+</style>
+
+<script>
+  const PUNKT: [number, number] = [5.7325826, 58.8507357] // Langgata 1B, Sandnes (lengde, bredde)
+  const boks = document.getElementById('kart')!
+
+  async function lagKart() {
+    const [maplibregl, { kartstil }, { default: arbeiderUrl }] = await Promise.all([
+      import('maplibre-gl'),
+      import('../lib/kartstil'),
+      import('maplibre-gl/dist/maplibre-gl-worker.mjs?url'),
+      import('maplibre-gl/dist/maplibre-gl.css'),
+    ])
+    maplibregl.setWorkerUrl(arbeiderUrl)
+    boks.querySelector('.kart-reserve')?.remove()
+
+    const kart = new maplibregl.Map({
+      container: boks,
+      style: kartstil,
+      center: PUNKT,
+      zoom: 16,
+      minZoom: 12,
+      maxZoom: 19,
+      cooperativeGestures: true, // rull siden som vanlig, Ctrl + rulling eller to fingre zoomer kartet
+      attributionControl: { compact: true }, // kildene (OpenFreeMap, OpenMapTiles, OpenStreetMap) kommer fra kartdataene
+      locale: {
+        'NavigationControl.ZoomIn': 'Zoom inn',
+        'NavigationControl.ZoomOut': 'Zoom ut',
+        'CooperativeGesturesHandler.WindowsHelpText': 'Hold Ctrl og rull for å zoome i kartet',
+        'CooperativeGesturesHandler.MacHelpText': 'Hold ⌘ og rull for å zoome i kartet',
+        'CooperativeGesturesHandler.MobileHelpText': 'Bruk to fingre for å flytte kartet',
+      },
+    })
+    kart.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
+
+    const nal = document.createElement('div')
+    nal.className = 'kart-nal'
+    nal.innerHTML = `<span class="kart-nal-navn">First Blood Tattoo</span>
+      <svg width="30" height="40" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 1C7.3 1 1 7.2 1 14.9 1 25.3 15 39 15 39s14-13.7 14-24.1C29 7.2 22.7 1 15 1z" fill="#E2A93B" stroke="#000" stroke-width="2"/><circle cx="15" cy="15" r="5" fill="#000"/></svg>`
+    new maplibregl.Marker({ element: nal, anchor: 'bottom' }).setLngLat(PUNKT).addTo(kart)
+  }
+
+  // Last kartet først når det er i ferd med å komme inn på skjermen
+  const vakt = new IntersectionObserver((treff) => {
+    if (treff.some((t) => t.isIntersecting)) {
+      vakt.disconnect()
+      lagKart().catch(() => {
+        const p = boks.querySelector('.kart-reserve')
+        if (p) p.textContent = 'Kartet kunne ikke vises. Langgata 1B, 4306 Sandnes.'
+      })
+    }
+  }, { rootMargin: '300px' })
+  vakt.observe(boks)
+</script>
