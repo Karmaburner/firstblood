@@ -1,0 +1,7 @@
+# Søkemotorer leser bare robots.txt i roten av et domene. På GitHub Pages ligger
+# denne under /firstblood/ og blir ikke lest. Den virker når siden får eget domene.
+# Mens siden er demo, skjules den med <meta name="robots" content="noindex"> i stedet.
+User-agent: *
+Allow: /
+
+Sitemap: https://karmaburner.github.io/firstblood/sitemap.xml

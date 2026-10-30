@@ -5,9 +5,36 @@ import Lightbox from '../components/Lightbox.astro'
 
 interface Props {
   title?: string
+  description?: string
 }
 
-const { title = 'Forside' } = Astro.props
+const standardBeskrivelse = 'First Blood Tattoo er Trond Kjørkleivs tatoveringsstudio i Langgata 1B i Sandnes. Godt gammeldags håndverk av god kvalitet. Gratis konsultasjon.'
+const { title = 'Forside', description = standardBeskrivelse } = Astro.props
+const fullTittel = title === 'Forside' ? 'First Blood Tattoo · Tatoveringsstudio i Sandnes' : `${title} · First Blood Tattoo`
+const kanonisk = new URL(Astro.url.pathname, Astro.site).href
+const delingsbilde = new URL(u('/og.jpg'), Astro.site).href
+const forside = new URL(u('/'), Astro.site).href
+
+// Strukturert data: forteller søkemotorer at dette er et tatoveringsstudio.
+// Åpningstider og vurderinger er utelatt til Trond har bekreftet dem.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TattooParlor',
+  name: 'First Blood Tattoo',
+  url: forside,
+  image: delingsbilde,
+  telephone: '+47 47 31 59 59',
+  founder: { '@type': 'Person', name: 'Trond Kjørkleiv' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Langgata 1B',
+    postalCode: '4306',
+    addressLocality: 'Sandnes',
+    addressCountry: 'NO',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 58.8507357, longitude: 5.7325826 },
+  sameAs: ['https://www.facebook.com/firstbloodtattoo', 'https://www.instagram.com/megatrond9/'],
+}
 const nav = [
   { href: u('/'), label: 'Forside' },
   { href: u('/galleri'), label: 'Galleri' },
@@ -24,8 +51,24 @@ const currentPath = Astro.url.pathname
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Demo: skjult for søkemotorer. Fjern denne linjen når Trond har godkjent siden. -->
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="description" content="First Blood Tattoo — Trond Kjørkleiv. Godt gammeldags håndverk av god kvalitet. Tatoveringsstudio i Sandnes." />
-    <title>{title} | First Blood Tattoo</title>
+    <meta name="description" content={description} />
+    <title>{fullTittel}</title>
+    <link rel="canonical" href={kanonisk} />
+    <link rel="icon" href={u('/favicon.ico')} sizes="any" />
+    <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nb_NO" />
+    <meta property="og:site_name" content="First Blood Tattoo" />
+    <meta property="og:title" content={fullTittel} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={kanonisk} />
+    <meta property="og:image" content={delingsbilde} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="First Blood-logoen med hodeskalle ved siden av et portrett av Trond Kjørkleiv" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600..900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
