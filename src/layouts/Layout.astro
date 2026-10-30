@@ -73,12 +73,14 @@ const currentPath = Astro.url.pathname
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600..900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* Logo: hodeskallen ligger bak teksten */
-    #fb-img    { height: 5.5rem; }
-    #skull-img { transform: translate(7px, 5px); }
+    /* Logo: hodeskallen og teksten side om side, så begge synes */
+    #site-logo { display: inline-flex; align-items: center; gap: 0.6rem; }
+    .logo-skalle { height: 3.75rem; width: auto; }
+    .logo-tekst  { height: 1.9rem; width: auto; }
     @media (min-width: 768px) {
-      #fb-img    { height: 7rem; }
-      #skull-img { transform: translate(9px, 6px); }
+      #site-logo { gap: 0.9rem; }
+      .logo-skalle { height: 5.25rem; }
+      .logo-tekst  { height: 3.1rem; }
     }
     .meny-knapp {
       display: inline-flex; align-items: center; gap: 0.6rem;
@@ -107,9 +109,9 @@ const currentPath = Astro.url.pathname
   <body class="flex flex-col min-h-screen">
     <header class="sticky top-0 z-50 border-b overflow-visible relative" style={`background-image: linear-gradient(to right, rgba(28,28,28,0.88) 0%, rgba(28,28,28,0.92) 10%, #000000 35%, #000000 60%, rgba(28,28,28,0.92) 90%, rgba(28,28,28,0.88) 100%), url('${u("/images/teppe.avif")}'); background-size: cover; background-position: center; border-color: var(--border);`}>
       <div class="px-4 md:px-8 h-20 md:h-[6.5rem] flex items-center justify-between gap-4">
-        <a href={u("/")} id="site-logo" class="relative inline-block shrink-0">
-          <img src={u("/images/logo.avif")}           alt=""            class="absolute inset-0 w-full h-full object-contain pointer-events-none" id="skull-img" />
-          <img src={u("/images/first-blood-tekst.avif")} alt="First Blood, til forsiden" class="relative w-auto drop-shadow-2xl" id="fb-img" />
+        <a href={u("/")} id="site-logo" class="shrink-0">
+          <img src={u("/images/logo-skalle.avif")} alt="" class="logo-skalle" width="215" height="240" />
+          <img src={u("/images/logo-tekst.avif")} alt="First Blood, til forsiden" class="logo-tekst" width="409" height="160" />
         </a>
         <div class="flex items-center gap-3 md:gap-6">
           <a href={u("/kontakt")} class="header-kontakt">Kontakt</a>
