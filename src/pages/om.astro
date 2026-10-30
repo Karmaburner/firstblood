@@ -65,7 +65,7 @@ import Layout from '../layouts/Layout.astro'
     font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
     font-size: 1.125rem; letter-spacing: 0.25em; color: var(--muted);
   }
-  h1 { margin-top: 0.5rem; line-height: 0.95; font-weight: 900; color: #F0EBE0; }
+  h1 { margin-top: 0.5rem; line-height: 1.05; font-weight: 900; color: #F0EBE0; } /* luft til Å, Æ og Ø */
   .navn {
     font-family: var(--font-overskrift); font-weight: 800; text-transform: uppercase;
     font-size: 1.75rem; letter-spacing: 0.06em; color: #C8BFB0; margin-top: 0.75rem;
@@ -86,7 +86,8 @@ import Layout from '../layouts/Layout.astro'
     margin-top: 2.5rem; font-family: var(--font-overskrift); font-weight: 900; text-transform: uppercase;
     font-size: clamp(2rem, 4vw, 3rem); line-height: 1; color: #F0EBE0;
   }
-  .slagord span { color: var(--accent); }
+  /* Som på forsiden: «Ingenting annet.» på egen linje, litt mindre */
+  .slagord span { display: block; margin-top: 0.12em; font-size: 0.6em; line-height: 1; letter-spacing: 0.04em; color: var(--accent); }
 
   .knapper { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
   .knapp {
@@ -94,6 +95,11 @@ import Layout from '../layouts/Layout.astro'
     font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
     font-size: 1.375rem; letter-spacing: 0.08em; line-height: 1; text-decoration: none; border-radius: var(--knapp-hjorne);
     transition: background-color 0.15s, color 0.15s;
+  }
+  /* Mobil: knappene stablet og like brede som den bredeste, så de får én felles kant */
+  @media (max-width: 599px) {
+    .knapper { display: grid; grid-template-columns: max-content; }
+    .knapper .knapp { justify-content: center; }
   }
   .knapp-hoved { background: var(--knapp); color: var(--knapp-tekst); }
   .knapp-hoved:hover { background: var(--knapp-hover); }
