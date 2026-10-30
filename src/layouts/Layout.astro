@@ -96,9 +96,11 @@ const currentPath = Astro.url.pathname
       display: none; align-items: center; min-height: 44px; padding: 0.55rem 1.4rem 0.4rem;
       font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
       font-size: 1.125rem; letter-spacing: 0.12em; line-height: 1;
-      background: var(--knapp); color: var(--knapp-tekst); border-radius: var(--knapp-hjorne); transition: background-color 0.15s;
+      /* Omriss, så «Se tatoveringer» i heroen er det tydelige hovedvalget */
+      background: transparent; color: var(--knapp); border: 2px solid var(--knapp);
+      border-radius: var(--knapp-hjorne); transition: background-color 0.15s, color 0.15s;
     }
-    .header-kontakt:hover { background: var(--knapp-hover); }
+    .header-kontakt:hover { background: var(--knapp); color: var(--knapp-tekst); }
     .meny-lenke { display: none; }
     @media (min-width: 768px) {
       .header-kontakt, .meny-lenke { display: inline-flex; }
