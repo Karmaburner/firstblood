@@ -106,6 +106,31 @@ const currentPath = Astro.url.pathname
       .header-kontakt, .meny-lenke { display: inline-flex; }
       #menu-btn { display: none; }
     }
+
+    /* Bunntekst: tre kolonner som starter likt, og en egen linje nederst */
+    .bunn { margin-top: 5rem; background: #0A0A0A; border-top: 1px solid #2a2a2a; color: #A9A39A; font-size: 1rem; line-height: 1.5; }
+    .bunn-innhold {
+      max-width: 72rem; margin: 0 auto; padding: 3rem 1.25rem 2rem;
+      display: grid; gap: 2.5rem; align-items: start;
+    }
+    @media (min-width: 768px) { .bunn-innhold { grid-template-columns: repeat(3, 1fr); padding: 3.5rem 2rem 2.5rem; } }
+    .bunn-kolonne { display: flex; flex-direction: column; gap: 0.4rem; }
+    .bunn-tittel {
+      font-family: var(--font-overskrift); font-weight: 800; text-transform: uppercase;
+      font-size: 1.125rem; letter-spacing: 0.12em; color: #F0EBE0; margin-bottom: 0.4rem;
+    }
+    .bunn-lenke { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 28px; align-self: flex-start; color: #A9A39A; text-decoration: none; transition: color 0.15s; }
+    .bunn-lenke svg { color: var(--ikon); flex-shrink: 0; }
+    .bunn-lenke:hover { color: #F0EBE0; }
+    .bunn a:focus-visible { outline: 3px solid #F0EBE0; outline-offset: 3px; }
+    .bunn-linje {
+      max-width: 72rem; margin: 0 auto; padding: 1.25rem 1.25rem 2rem;
+      border-top: 1px solid #1f1f1f;
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem;
+    }
+    @media (min-width: 768px) { .bunn-linje { padding: 1.25rem 2rem 2rem; } }
+    .bunn-linje a { color: #A9A39A; text-decoration: underline; text-underline-offset: 3px; }
+    .bunn-linje a:hover { color: #F0EBE0; }
   </style>
   </head>
   <body class="flex flex-col min-h-screen">
@@ -151,32 +176,28 @@ const currentPath = Astro.url.pathname
       <slot />
     </main>
 
-    <footer class="mt-20 border-t" style="background-color: #0A0A0A; border-color: var(--border);">
-      <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-6 text-sm" style="color: #888888;">
-        <div>
-          <p class="font-semibold mb-1" style="font-family: var(--font-overskrift); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;"><span style="color: var(--accent);">FIRST BLOOD</span> <span style="color: #F0EBE0;">TATTOO</span></p>
+    <footer class="bunn">
+      <div class="bunn-innhold">
+        <div class="bunn-kolonne">
+          <h2 class="bunn-tittel">First Blood Tattoo</h2>
           <p>Trond Kjørkleiv</p>
-          <p class="mt-1">Langgata 1B, 4306 Sandnes</p>
-          <p class="mt-1">Org.nr: 811 872 792</p>
+          <p>Langgata 1B, 4306 Sandnes</p>
+          <p>Org.nr. 811 872 792</p>
         </div>
-        <div class="flex flex-col gap-2">
-          <a href="tel:47315959" class="flex items-center gap-2 hover:text-[#F0EBE0] transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11 19.79 19.79 0 0 1 1.62 2.38a2 2 0 0 1 1.79-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.46-.46a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            47 31 59 59
-          </a>
-          <a href="https://www.facebook.com/firstbloodtattoo" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-[#F0EBE0] transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            Facebook
-          </a>
-          <a href="https://www.instagram.com/megatrond9/" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-[#F0EBE0] transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            @megatrond9
-          </a>
+        <div class="bunn-kolonne">
+          <h2 class="bunn-tittel">Kontakt</h2>
+          <a href="tel:+4747315959" class="bunn-lenke"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11 19.79 19.79 0 0 1 1.62 2.38a2 2 0 0 1 1.79-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.46-.46a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>47 31 59 59</a>
+          <a href="https://www.facebook.com/firstbloodtattoo" target="_blank" rel="noopener" class="bunn-lenke"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a>
+          <a href="https://www.instagram.com/megatrond9/" target="_blank" rel="noopener" class="bunn-lenke"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@megatrond9</a>
         </div>
-        <div class="self-end text-sm text-right space-y-1">
-          <p>© {new Date().getFullYear()} First Blood Tattoo</p>
-          <p>Nettside av: <a href="https://lilitlabs.com" target="_blank" rel="noopener" class="hover:text-[#F0EBE0] transition-colors underline underline-offset-2">Lilit Labs</a></p>
-        </div>
+        <nav class="bunn-kolonne" aria-label="Sider">
+          <h2 class="bunn-tittel">Sider</h2>
+          {nav.map(({ href, label }) => <a href={href} class="bunn-lenke">{label}</a>)}
+        </nav>
+      </div>
+      <div class="bunn-linje">
+        <p>© {new Date().getFullYear()} First Blood Tattoo</p>
+        <p>Nettside av: <a href="https://lilitlabs.com" target="_blank" rel="noopener">Lilit Labs</a></p>
       </div>
     </footer>
 
