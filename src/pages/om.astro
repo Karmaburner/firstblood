@@ -4,9 +4,10 @@ import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Om" description="Trond Kjørkleiv driver First Blood Tattoo i Sandnes. Godt gammeldags håndverk av god kvalitet, ærlig kommunikasjon og lidenskap for kunsten.">
+  <div class="side-bakgrunn">
   <section class="om">
     <figure class="om-bilde">
-      <img src={u("/images/trond.avif")} alt="Trond Kjørkleiv med solbriller og sigar" width="1024" height="1280" />
+      <img src={u("/images/trond-frilagt.avif")} alt="Trond Kjørkleiv med solbriller og sigar" width="1400" height="1050" />
     </figure>
 
     <div class="om-tekst">
@@ -47,6 +48,7 @@ import Layout from '../layouts/Layout.astro'
       </section>
     </div>
   </section>
+  </div>
 </Layout>
 
 <style>
@@ -55,11 +57,25 @@ import Layout from '../layouts/Layout.astro'
     max-width: 72rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem;
   }
   @media (min-width: 900px) {
-    .om { grid-template-columns: 0.9fr 1.1fr; gap: 4.5rem; padding: 4.5rem 2rem 5rem; align-items: start; }
+    .om { grid-template-columns: 1.05fr 0.95fr; gap: 4rem; padding: 4.5rem 2rem 5rem; align-items: start; }
     .om-bilde { position: sticky; top: 8.5rem; }
   }
-  .om-bilde { margin: 0; }
-  .om-bilde img { display: block; width: 100%; height: auto; }
+  /* Frilagt bilde som på forsiden: skjorten fader ut nederst og mot sidene */
+  .om-bilde { margin: 0 -1.25rem; }
+  .om-bilde img {
+    display: block; width: 100%; height: auto;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 98%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 98%);
+  }
+  @media (min-width: 900px) {
+    .om-bilde { margin: 0 0 0 -3rem; }
+    .om-bilde img {
+      -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 98%), linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to bottom, #000 60%, transparent 98%), linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      mask-composite: intersect;
+    }
+  }
 
   .etikett {
     font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;

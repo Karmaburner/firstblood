@@ -55,3 +55,23 @@
     font-size: clamp(1.4rem, 3vw, 2.25rem);
   }
 }
+
+/* Felles bakgrunn for toppen av undersidene: samme mønster som header og hero,
+   synlig i kantene, mørk midte, og som toner gradvis ut nedover siden. */
+.side-bakgrunn { position: relative; isolation: isolate; }
+.side-bakgrunn::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: min(100%, 60rem);
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(28,28,28,0.88) 0%, rgba(28,28,28,0.92) 10%, #000 35%, #000 60%, rgba(28,28,28,0.92) 90%, rgba(28,28,28,0.88) 100%),
+    url('/images/teppe.avif');
+  background-size: 100% 100%, auto;
+  background-position: center top;
+  background-repeat: no-repeat, repeat-x;
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
+}
