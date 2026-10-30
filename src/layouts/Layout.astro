@@ -28,7 +28,7 @@ const currentPath = Astro.url.pathname
     <title>{title} | First Blood Tattoo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Staatliches&family=Teko:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600..900&family=Teko:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     #fb-img   { height: 4rem;  transform: translateY(-10px); }
     #skull-img { transform: translate(10px, 7px); }
@@ -47,7 +47,7 @@ const currentPath = Astro.url.pathname
       </a>
 
       <div class="max-w-5xl mx-auto px-6 h-24 md:h-44 flex flex-row items-center justify-end">
-        <a href={u("/kontakt")} class="hidden md:inline-flex items-center px-5 rounded-full font-medium text-sm transition-opacity hover:opacity-80" style="position: absolute; right: 9rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.12em; background-color: var(--accent-knapp); color: #ffffff; line-height: 1; padding-top: 0.65rem; padding-bottom: 0.35rem;">Kontakt</a>
+        <a href={u("/kontakt")} class="hidden md:inline-flex items-center px-5 rounded-full font-medium text-sm transition-opacity hover:opacity-80" style="position: absolute; right: 9rem; font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 0.12em; background-color: var(--accent-knapp); color: #ffffff; line-height: 1; padding-top: 0.65rem; padding-bottom: 0.35rem;">Kontakt</a>
         <a href={u("/meny")} class="hidden md:flex flex-col gap-1.5 p-2" style="position: absolute; right: 1.5rem; color: var(--text); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
           <svg width="64" height="64" viewBox="0 0 28 28" fill="currentColor">
             <rect x="3" y="3" width="10" height="10" rx="2"/>
@@ -66,7 +66,7 @@ const currentPath = Astro.url.pathname
         </button>
       </div>
       <div id="mobile-menu" class="hidden md:hidden border-t" style="background-color: var(--bg); border-color: var(--border);">
-        <ul class="flex flex-col px-6 py-4 gap-4" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.12em; color: #e8f4f8;">
+        <ul class="flex flex-col px-6 py-4 gap-4" style="font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase; font-size: 1.3rem; letter-spacing: 0.12em; color: #e8f4f8;">
           {nav.map(({ href, label }) => (
             <li>
               <a href={href} class="hover:text-[#F0EBE0] transition-colors">{label}</a>
@@ -86,7 +86,7 @@ const currentPath = Astro.url.pathname
     <footer class="mt-20 border-t" style="background-color: #0A0A0A; border-color: var(--border);">
       <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-6 text-sm" style="color: #888888;">
         <div>
-          <p class="font-semibold mb-1" style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 0.08em;"><span style="color: var(--accent);">FIRST BLOOD</span> <span style="color: #F0EBE0;">TATTOO</span></p>
+          <p class="font-semibold mb-1" style="font-family: var(--font-overskrift); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;"><span style="color: var(--accent);">FIRST BLOOD</span> <span style="color: #F0EBE0;">TATTOO</span></p>
           <p>Trond Kjørkleiv</p>
           <p class="mt-1">Langgata 1B, 4306 Sandnes</p>
           <p class="mt-1">Org.nr: 811 872 792</p>

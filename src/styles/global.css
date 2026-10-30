@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --font-overskrift: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
   --accent: #F80008;        /* rødfargen i logoen */
   --accent-knapp: #E00008;  /* samme rød, litt dypere, så hvit tekst får nok kontrast */
   --bg: #0a1628;
@@ -34,7 +35,8 @@
     font-family: 'Teko', sans-serif;
   }
   h1, h2, h3, h4 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-overskrift); font-weight: 800;
+    text-transform: uppercase;
     letter-spacing: 0.02em;
   }
   h1 {

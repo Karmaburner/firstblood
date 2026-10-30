@@ -21,7 +21,7 @@ const categories = [
 
 <Layout title="Galleri">
   <section class="px-4 md:px-6 py-10 md:py-16">
-    <div class="w-full mb-10 rounded-xl flex flex-col overflow-hidden" style="background-color: #111111; font-family: 'Anton', sans-serif; min-height: 580px;">
+    <div class="w-full mb-10 rounded-xl flex flex-col overflow-hidden" style="background-color: #111111; font-family: var(--font-overskrift); font-weight: 900; min-height: 580px;">
       <div class="flex items-center justify-center px-10" style="flex: 0 0 38.2%;">
         <h1 class="font-bold text-center" style="color: #ffffff; text-transform: uppercase;">Ink Work</h1>
       </div>
@@ -35,8 +35,8 @@ const categories = [
             style={`border-left: 2px solid #ffffff; border-right: ${i === 0 || i === categories.length - 1 ? '2px solid #ffffff' : 'none'}; background: transparent;`}
           >
             <span class="shelf-label" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
-              <span class="shelf-text" style="font-family: 'Anton', sans-serif; font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: #aaaaaa; white-space: nowrap; writing-mode: vertical-rl; transform: rotate(180deg); transition: font-size 0.3s, color 0.3s, writing-mode 0.3s;">{label}</span>
-              <span class="velg-btn" style="font-family: 'Anton', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff; border: 1.5px solid #ffffff; padding: 0.3rem 1rem; white-space: nowrap; transition: background-color 0.2s, color 0.2s; display: none;">VELG</span>
+              <span class="shelf-text" style="font-family: var(--font-overskrift); font-weight: 900; font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: #aaaaaa; white-space: nowrap; writing-mode: vertical-rl; transform: rotate(180deg); transition: font-size 0.3s, color 0.3s, writing-mode 0.3s;">{label}</span>
+              <span class="velg-btn" style="font-family: var(--font-overskrift); font-weight: 900; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #ffffff; border: 1.5px solid #ffffff; padding: 0.3rem 1rem; white-space: nowrap; transition: background-color 0.2s, color 0.2s; display: none;">VELG</span>
             </span>
           </button>
         ))}

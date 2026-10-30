@@ -7,14 +7,14 @@ import Layout from '../layouts/Layout.astro'
     <h1 class="font-bold text-center mb-3" style="color: var(--text);">Kontakt</h1>
     <p class="text-center mb-4" style="color: var(--muted);">Ring eller send melding for timebestilling og spørsmål.</p>
     <p class="text-center mb-10 md:mb-14">
-      <span style="font-family: 'Anton', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Gratis konsultasjon</span>
+      <span style="font-family: var(--font-overskrift); font-weight: 900; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Gratis konsultasjon</span>
       <span style="color: var(--muted); font-size: 0.9rem;"> — ta kontakt så finner vi det rette for deg.</span>
     </p>
 
     <div class="grid md:grid-cols-2 gap-8 md:gap-12">
       <!-- Kontaktinfo -->
       <div class="space-y-4">
-        <h2 class="text-xl font-semibold mb-4" style="color: var(--text); font-family: 'Cormorant Garamond', serif;">Kontaktinformasjon</h2>
+        <h2 class="text-xl font-semibold mb-4" style="color: var(--text); font-family: var(--font-overskrift); font-weight: 800;">Kontaktinformasjon</h2>
 
         <a href="tel:47315959" class="flex items-center gap-4 p-4 rounded-xl border transition-colors group hover:opacity-80" style="background-color: var(--bg-secondary); border-color: var(--border);">
           <span class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background-color: #2a2a2a; color: var(--text);">
@@ -70,7 +70,7 @@ import Layout from '../layouts/Layout.astro'
 
       <!-- Kontaktskjema -->
       <div>
-        <h2 class="text-xl font-semibold mb-6" style="color: var(--text); font-family: 'Cormorant Garamond', serif;">Send en melding</h2>
+        <h2 class="text-xl font-semibold mb-6" style="color: var(--text); font-family: var(--font-overskrift); font-weight: 800;">Send en melding</h2>
         <form class="space-y-4" id="contact-form" action="https://formspree.io/f/XXXXXXXX" method="POST">
           <div>
             <label for="name" class="block text-sm font-medium mb-1" style="color: var(--muted);">Navn</label>

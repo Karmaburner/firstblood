@@ -6,40 +6,21 @@ import { allImages } from '../data/images'
 
 <Layout title="Forside">
 
-  <div class="min-h-[calc(100svh-6rem)] md:min-h-[calc(100svh-11rem)]" style="position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-    <!-- Waves left -->
-    <img
-      src={u("/images/bolger.avif")}
-      alt="" aria-hidden="true"
-      style="position: absolute; left: 0; top: calc(20% + 100px); bottom: 0; width: auto; max-width: 50%; height: 80%; object-fit: contain; object-position: top left; opacity: 0.28; pointer-events: none; user-select: none; z-index: 0; mask-image: linear-gradient(to left, transparent 0%, black 40%); -webkit-mask-image: linear-gradient(to left, transparent 0%, black 40%);"
-    />
-
-    <!-- Hero content -->
-    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2rem 1rem;">
-      <img
-        src={u("/images/first-blood-hero.avif")}
-        alt="First Blood Tattoo"
-        style="--w: clamp(260px, min(60vw, 60vh), 680px); width: var(--w); height: auto; filter: drop-shadow(0 8px 40px rgba(0,0,0,0.9)); position: relative; z-index: 1; margin-bottom: calc(var(--w) * -0.33); transform: translateX(-4%);"
-      />
-      <img
-        src={u("/images/logo.avif")}
-        alt=""
-        style="width: clamp(140px, min(28vw, 28vh), 300px); height: auto; position: relative; z-index: 2; pointer-events: none;"
-      />
-      <p style="font-family: 'Teko', sans-serif; font-size: clamp(2.5rem, min(9vw, 10vh), 8rem); letter-spacing: 0.18em; color: #ffffff; line-height: 1; margin-top: -0.25rem; text-shadow: 0 4px 30px rgba(0,0,0,0.8);">TATTOO</p>
-      <div style="margin-top: 1.2rem;">
-        <p style="font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.3em; color: var(--muted);">— Tatoveringsstudio · Sandnes —</p>
-        <p style="font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.4rem); font-style: italic; color: #F0EBE0; margin-top: 0.4rem; letter-spacing: 0.05em;">Vi tatoverer. Ingenting annet.</p>
+  <!-- Hero: budskap til venstre, Trond til høyre, to tydelige valg -->
+  <section class="hero">
+    <div class="hero-tekst">
+      <p class="hero-etikett">Tatoveringsstudio · Sandnes</p>
+      <h1 class="hero-tittel">Vi tatoverer.<br /><span>Ingenting annet.</span></h1>
+      <p class="hero-ingress">Trond Kjørkleiv. Godt gammeldags håndverk av god kvalitet.</p>
+      <div class="hero-knapper">
+        <a href={u('/galleri')} class="knapp knapp-hoved">Se tatoveringer</a>
+        <a href={u('/kontakt')} class="knapp knapp-kant">Ta kontakt</a>
       </div>
     </div>
-
-    <!-- Trond right -->
-    <img
-      src={u("/images/trond.avif")}
-      alt="" aria-hidden="true"
-      style="position: absolute; right: 0; top: 0; height: 75%; width: auto; object-fit: contain; object-position: top right; opacity: 0.24; pointer-events: none; user-select: none; z-index: 1; mask-image: linear-gradient(to right, transparent 0%, black 40%), linear-gradient(to bottom, black 50%, transparent 100%); mask-composite: intersect; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%), linear-gradient(to bottom, black 50%, transparent 100%); -webkit-mask-composite: source-in;"
-    />
-  </div>
+    <figure class="hero-bilde">
+      <img src={u('/images/trond.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="760" height="956" fetchpriority="high" />
+    </figure>
+  </section>
 
   <!-- Full-width gallery -->
   <div class="columns-2 md:columns-3 lg:columns-5 gap-1 space-y-1 w-full">
@@ -50,4 +31,92 @@ import { allImages } from '../data/images'
     ))}
   </div>
 
+
 </Layout>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 3.5rem;
+  }
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem;
+      min-height: calc(100svh - 11rem);
+      padding: 3rem 2rem;
+    }
+  }
+  .hero-etikett {
+    font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
+    font-size: 1.125rem;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+  }
+  .hero-tittel {
+    font-family: var(--font-overskrift);
+    font-weight: 900;
+    font-size: clamp(3rem, 7.5vw, 6.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: #F0EBE0;
+    margin-top: 0.75rem;
+  }
+  .hero-tittel span { color: var(--accent); }
+  .hero-ingress {
+    font-size: 1.625rem;
+    line-height: 1.3;
+    color: #C8BFB0;
+    margin-top: 1.25rem;
+    max-width: 32rem;
+  }
+  .hero-knapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .knapp {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0.7rem 1.6rem 0.5rem;
+    font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
+    font-size: 1.375rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .knapp:focus-visible { outline: 3px solid #F0EBE0; outline-offset: 3px; }
+  .knapp-hoved { background: var(--accent-knapp); color: #fff; }
+  .knapp-hoved:hover { background: #B80006; }
+  .knapp-kant { border: 2px solid #F0EBE0; color: #F0EBE0; }
+  .knapp-kant:hover { background: #F0EBE0; color: #000; }
+  .hero-bilde {
+    position: relative;
+    margin: 0;
+    max-width: 26rem;
+    justify-self: center;
+    width: calc(100% - 14px); /* plass til den røde rammen */
+    margin-right: 14px;
+  }
+  .hero-bilde::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translate(14px, 14px);
+    border: 2px solid var(--accent);
+  }
+  .hero-bilde img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

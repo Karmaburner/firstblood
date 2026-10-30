@@ -22,12 +22,12 @@ import Layout from '../layouts/Layout.astro'
         <!-- Visittkort-kort -->
         <div class="inline-block mb-8 p-6 border-2 relative overflow-hidden" style="background-color: #0A0A0A; border-color: var(--accent); min-width: 460px; min-height: 280px;">
           <img src={u("/images/bolger.avif")} alt="" class="absolute w-full pointer-events-none" style="opacity: 1; bottom: -40px; left: 0; z-index: 0;" />
-          <h1 class="font-bold relative mt-0" style="color: #C8BFB0; font-family: 'Staatliches', sans-serif; font-size: clamp(2.2rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 0.75; z-index: 1;">Tr<span style="color: var(--accent);">o</span>nd<br/>Kjørkleiv</h1>
+          <h1 class="font-bold relative mt-0" style="color: #C8BFB0; font-family: var(--font-overskrift); font-weight: 900; text-transform: uppercase; font-size: clamp(2.2rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 0.75; z-index: 1;">Tr<span style="color: var(--accent);">o</span>nd<br/>Kjørkleiv</h1>
         </div>
         <!-- Google rating + tagline -->
         <div class="mb-6">
           <p class="text-xs uppercase tracking-[0.25em] mb-2" style="color: var(--accent);">Sandnes · Siden 2007</p>
-          <p class="font-semibold mb-3" style="color: var(--text); font-family: 'Anton', sans-serif; font-size: 1.5rem;">Godt gammeldags håndverk</p>
+          <p class="font-semibold mb-3" style="color: var(--text); font-family: var(--font-overskrift); font-weight: 900; font-size: 1.5rem;">Godt gammeldags håndverk</p>
           <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border" style="border-color: var(--border); background-color: var(--bg-secondary);">
             <span class="flex gap-0.5" style="color: #F5A623;">
               {'★★★★★'.split('').map(s => <span>{s}</span>)}
@@ -93,7 +93,7 @@ import Layout from '../layouts/Layout.astro'
         <!-- Linework by Trond -->
         <div class="mt-12 pt-8 border-t rounded-2xl" style="border-color: var(--border);">
           <p class="text-xs uppercase tracking-[0.25em] mb-2" style="color: var(--text);">Sideprosjekt</p>
-          <h3 class="font-semibold mb-3" style="color: var(--text); font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;">Linework by Trond</h3>
+          <h3 class="font-semibold mb-3" style="color: var(--text); font-family: var(--font-overskrift); font-weight: 800; font-size: 1.6rem;">Linework by Trond</h3>
           <p class="text-sm leading-relaxed mb-4" style="color: var(--text);">
             Utenfor studio-arbeidet utforsker Trond håndtegnet kunst og linework — et kreativt sideprosjekt der pennen tar over fra nålen.
           </p>
