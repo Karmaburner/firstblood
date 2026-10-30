@@ -1,123 +1,204 @@
 ---
 import Layout from '../layouts/Layout.astro'
+
+// Skjemaet sendes via Web3Forms (web3forms.com). Nøkkelen hentes gratis der,
+// med e-postadressen meldingene skal til. Står den tom, viser skjemaet telefonnummeret i stedet.
+const WEB3FORMS_NOKKEL = ''
 ---
 
 <Layout title="Kontakt">
-  <section class="max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-16">
-    <h1 class="font-bold text-center mb-3" style="color: var(--text);">Kontakt</h1>
-    <p class="text-center mb-4" style="color: var(--muted);">Ring eller send melding for timebestilling og spørsmål.</p>
-    <p class="text-center mb-10 md:mb-14">
-      <span style="font-family: var(--font-overskrift); font-weight: 900; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Gratis konsultasjon</span>
-      <span style="color: var(--muted); font-size: 0.9rem;"> — ta kontakt så finner vi det rette for deg.</span>
-    </p>
+  <section class="kontakt">
+    <header class="kontakt-topp">
+      <p class="etikett">Kontakt</p>
+      <h1>Gratis konsultasjon</h1>
+      <p class="ingress">Ring eller send melding for timebestilling og spørsmål. Ta kontakt, så finner vi det rette for deg.</p>
+    </header>
 
-    <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-      <!-- Kontaktinfo -->
-      <div class="space-y-4">
-        <h2 class="text-xl font-semibold mb-4" style="color: var(--text); font-family: var(--font-overskrift); font-weight: 800;">Kontaktinformasjon</h2>
-
-        <a href="tel:47315959" class="flex items-center gap-4 p-4 rounded-xl border transition-colors group hover:opacity-80" style="background-color: var(--bg-secondary); border-color: var(--border);">
-          <span class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background-color: #2a2a2a; color: var(--text);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11 19.79 19.79 0 0 1 1.62 2.38a2 2 0 0 1 1.79-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.46-.46a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </span>
-          <div>
-            <p class="text-xs uppercase tracking-wide" style="color: var(--muted);">Telefon</p>
-            <p class="font-medium" style="color: var(--text);">47 31 59 59</p>
-          </div>
-        </a>
-
-        <div class="flex items-center gap-4 p-4 rounded-xl border" style="background-color: var(--bg-secondary); border-color: var(--border);">
-          <span class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background-color: #2a2a2a; color: var(--text);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </span>
-          <div>
-            <p class="text-xs uppercase tracking-wide" style="color: var(--muted);">Adresse</p>
-            <p class="font-medium" style="color: var(--text);">Langgata 1B, 4306 Sandnes</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4 p-4 rounded-xl border" style="background-color: var(--bg-secondary); border-color: var(--border);">
-          <span class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background-color: #2a2a2a; color: var(--text);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </span>
-          <div>
-            <p class="text-xs uppercase tracking-wide" style="color: var(--muted);">Åpningstider</p>
-            <p class="font-medium" style="color: var(--text);">Man–lør kl. 10:00</p>
-            <p class="text-xs mt-0.5" style="color: var(--muted);">Etter avtale</p>
-          </div>
-        </div>
-
-        <a href="https://www.facebook.com/firstbloodtattoo" target="_blank" rel="noopener" class="flex items-center gap-4 p-4 rounded-xl border transition-colors group hover:opacity-80" style="background-color: var(--bg-secondary); border-color: var(--border);">
-          <span class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background-color: #2a2a2a; color: var(--text);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </span>
-          <div>
-            <p class="text-xs uppercase tracking-wide" style="color: var(--muted);">Facebook</p>
-            <p class="font-medium" style="color: var(--text);">firstbloodtattoo</p>
-          </div>
-        </a>
-
-        <a href="https://www.instagram.com/megatrond9/" target="_blank" rel="noopener" class="flex items-center gap-4 p-4 rounded-xl border transition-colors group hover:opacity-80" style="background-color: var(--bg-secondary); border-color: var(--border);">
-          <span class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background-color: #2a2a2a; color: var(--text);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </span>
-          <div>
-            <p class="text-xs uppercase tracking-wide" style="color: var(--muted);">Instagram</p>
-            <p class="font-medium" style="color: var(--text);">@megatrond9</p>
-          </div>
-        </a>
+    <div class="kontakt-rutenett">
+      <!-- Kontaktinfo: rene linjer, ingen bokser -->
+      <div>
+        <h2>Studioet</h2>
+        <ul class="info">
+          <li>
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11 19.79 19.79 0 0 1 1.62 2.38a2 2 0 0 1 1.79-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.46-.46a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>
+              <span class="info-navn">Telefon</span>
+              <a href="tel:+4747315959" class="info-verdi stor">47 31 59 59</a>
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <span class="info-navn">Adresse</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Langgata+1B%2C+4306+Sandnes" target="_blank" rel="noopener" class="info-verdi">Langgata 1B, 4306 Sandnes</a>
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <span class="info-navn">Åpningstider</span>
+              <span class="info-verdi">Mandag–lørdag fra kl. 10:00, etter avtale</span>
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <div>
+              <span class="info-navn">Facebook</span>
+              <a href="https://www.facebook.com/firstbloodtattoo" target="_blank" rel="noopener" class="info-verdi">firstbloodtattoo</a>
+            </div>
+          </li>
+          <li>
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <div>
+              <span class="info-navn">Instagram</span>
+              <a href="https://www.instagram.com/megatrond9/" target="_blank" rel="noopener" class="info-verdi">@megatrond9</a>
+            </div>
+          </li>
+        </ul>
       </div>
 
-      <!-- Kontaktskjema -->
+      <!-- Skjema -->
       <div>
-        <h2 class="text-xl font-semibold mb-6" style="color: var(--text); font-family: var(--font-overskrift); font-weight: 800;">Send en melding</h2>
-        <form class="space-y-4" id="contact-form" action="https://formspree.io/f/XXXXXXXX" method="POST">
-          <div>
-            <label for="name" class="block text-sm font-medium mb-1" style="color: var(--muted);">Navn</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              class="w-full px-4 py-2.5 rounded-lg border focus:outline-none text-sm"
-              style="background-color: var(--bg-secondary); border-color: var(--border); color: var(--text);"
-              placeholder="Ditt navn"
-            />
+        <h2>Send en melding</h2>
+        <form id="kontaktskjema" class="skjema" novalidate data-nokkel={WEB3FORMS_NOKKEL}>
+          <input type="hidden" name="subject" value="Ny melding fra nettsiden til First Blood Tattoo" />
+          <input type="hidden" name="from_name" value="First Blood Tattoo nettside" />
+          <!-- Felle for spamroboter: skjult for mennesker -->
+          <input type="checkbox" name="botcheck" class="felle" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="felt">
+            <label for="navn">Navn</label>
+            <input id="navn" name="name" type="text" autocomplete="name" required aria-describedby="navn-feil" />
+            <p id="navn-feil" class="feil" hidden>Skriv inn navnet ditt.</p>
           </div>
-          <div>
-            <label for="phone" class="block text-sm font-medium mb-1" style="color: var(--muted);">Telefon</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              class="w-full px-4 py-2.5 rounded-lg border focus:outline-none text-sm"
-              style="background-color: var(--bg-secondary); border-color: var(--border); color: var(--text);"
-              placeholder="Ditt telefonnummer"
-            />
+          <div class="felt">
+            <label for="telefon">Telefon eller e-post</label>
+            <input id="telefon" name="kontakt" type="text" autocomplete="tel" required aria-describedby="telefon-hjelp telefon-feil" />
+            <p id="telefon-hjelp" class="hjelp">Så vi kan svare deg.</p>
+            <p id="telefon-feil" class="feil" hidden>Skriv inn telefonnummer eller e-post.</p>
           </div>
-          <div>
-            <label for="message" class="block text-sm font-medium mb-1" style="color: var(--muted);">Melding</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              required
-              class="w-full px-4 py-2.5 rounded-lg border focus:outline-none text-sm resize-none"
-              style="background-color: var(--bg-secondary); border-color: var(--border); color: var(--text);"
-              placeholder="Fortell litt om hva du ønsker å tatovere..."
-            ></textarea>
+          <div class="felt">
+            <label for="melding">Hva ønsker du å tatovere?</label>
+            <textarea id="melding" name="message" rows="6" required aria-describedby="melding-hjelp melding-feil"></textarea>
+            <p id="melding-hjelp" class="hjelp">Fortell gjerne om motiv, størrelse og hvor på kroppen.</p>
+            <p id="melding-feil" class="feil" hidden>Skriv noen ord om hva du ønsker.</p>
           </div>
-          <button
-            type="submit"
-            class="w-full inline-flex items-center justify-center gap-2 text-white py-3 rounded-full font-medium hover:opacity-85 transition-opacity"
-            style="background-color: var(--accent-knapp);"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send melding
-          </button>
-          <p id="form-status" class="text-center text-sm hidden" style="color: var(--muted);"></p>
+
+          <button type="submit" class="send">Send melding</button>
+          <p id="skjema-status" class="status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  .kontakt { max-width: 68rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  @media (min-width: 768px) { .kontakt { padding: 4.5rem 2rem 5rem; } }
+
+  .kontakt-topp { max-width: 40rem; margin-bottom: 3rem; }
+  .etikett {
+    font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
+    font-size: 1.125rem; letter-spacing: 0.25em; color: var(--muted);
+  }
+  .kontakt-topp h1 { margin-top: 0.5rem; line-height: 0.95; font-weight: 900; color: #F0EBE0; }
+  .ingress { font-size: 1.75rem; line-height: 1.3; color: #C8BFB0; margin-top: 1rem; }
+
+  .kontakt-rutenett { display: grid; gap: 3rem; }
+  @media (min-width: 900px) { .kontakt-rutenett { grid-template-columns: 0.9fr 1.1fr; gap: 5rem; } }
+
+  h2 { font-size: 1.75rem; color: #F0EBE0; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #3a3a3a; }
+
+  .info { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.5rem; }
+  .info li { display: flex; gap: 1rem; align-items: flex-start; }
+  .info svg { flex-shrink: 0; margin-top: 0.35rem; color: var(--ikon); }
+  .info-navn {
+    display: block; font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
+    font-size: 1rem; letter-spacing: 0.15em; color: var(--muted);
+  }
+  .info-verdi { display: inline-block; font-size: 1.625rem; line-height: 1.3; color: #F0EBE0; }
+  .info-verdi.stor { font-family: var(--font-overskrift); font-weight: 800; font-size: 2rem; letter-spacing: 0.04em; }
+  a.info-verdi { text-decoration: underline; text-decoration-color: rgba(240,235,224,0.35); text-underline-offset: 4px; }
+  a.info-verdi:hover { text-decoration-color: #F0EBE0; }
+  a.info-verdi:focus-visible, .send:focus-visible { outline: 3px solid #F0EBE0; outline-offset: 3px; }
+
+  .skjema { display: grid; gap: 1.25rem; }
+  .felt label {
+    display: block; margin-bottom: 0.4rem; font-family: var(--font-overskrift); font-weight: 700;
+    text-transform: uppercase; font-size: 1.0625rem; letter-spacing: 0.12em; color: #F0EBE0;
+  }
+  .felt input, .felt textarea {
+    width: 100%; padding: 0.75rem 0.9rem; font: inherit; font-size: 1.25rem; color: #F0EBE0;
+    background: #111; border: 1px solid #6b6b6b; border-radius: 0; resize: vertical;
+    scroll-margin-top: 8rem; /* under den faste headeren */
+  }
+  .felt input:focus-visible, .felt textarea:focus-visible { outline: 2px solid #F0EBE0; outline-offset: 2px; border-color: #F0EBE0; }
+  .felt [aria-invalid='true'] { border-color: #FF5A5F; }
+  .hjelp { font-size: 1.125rem; color: #A9A9A9; margin-top: 0.35rem; }
+  .feil { font-size: 1.125rem; color: #FF7A7E; margin-top: 0.35rem; }
+  .felle { position: absolute; left: -9999px; }
+
+  .send {
+    justify-self: start; min-height: 3rem; padding: 0.75rem 2rem 0.55rem; border: 0; cursor: pointer;
+    font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase; font-size: 1.375rem; letter-spacing: 0.08em;
+    background: var(--knapp); color: var(--knapp-tekst); transition: background-color 0.15s;
+  }
+  .send:hover { background: var(--knapp-hover); }
+  .send[disabled] { opacity: 0.7; cursor: progress; }
+  .status { font-size: 1.25rem; color: #F0EBE0; min-height: 1.5em; }
+  .status a { color: #F0EBE0; text-decoration: underline; }
+</style>
+
+<script>
+  const skjema = document.getElementById('kontaktskjema') as HTMLFormElement
+  const status = document.getElementById('skjema-status')!
+  const knapp = skjema.querySelector<HTMLButtonElement>('.send')!
+  const felter = [
+    { el: skjema.querySelector<HTMLInputElement>('#navn')!, feil: 'navn-feil' },
+    { el: skjema.querySelector<HTMLInputElement>('#telefon')!, feil: 'telefon-feil' },
+    { el: skjema.querySelector<HTMLTextAreaElement>('#melding')!, feil: 'melding-feil' },
+  ]
+  const telefonSvar = 'Ring oss heller på <a href="tel:+4747315959">47 31 59 59</a>.'
+
+  const sjekk = () => {
+    let forste: HTMLElement | null = null
+    for (const { el, feil } of felter) {
+      const tom = !el.value.trim()
+      el.setAttribute('aria-invalid', String(tom))
+      document.getElementById(feil)!.hidden = !tom
+      if (tom && !forste) forste = el
+    }
+    return forste
+  }
+  felter.forEach(({ el }) => el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') sjekk() }))
+
+  skjema.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const mangler = sjekk()
+    if (mangler) { mangler.focus(); status.textContent = 'Noen felt mangler. Se over skjemaet.'; return }
+
+    const nokkel = skjema.dataset.nokkel
+    if (!nokkel) { status.innerHTML = 'Skjemaet er ikke koblet til ennå. ' + telefonSvar; return }
+
+    const data = Object.fromEntries(new FormData(skjema))
+    knapp.disabled = true
+    knapp.textContent = 'Sender …'
+    status.textContent = ''
+    try {
+      const svar = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...data, access_key: nokkel }),
+      })
+      const json = await svar.json()
+      if (!svar.ok || !json.success) throw new Error(json.message)
+      skjema.reset()
+      status.textContent = 'Takk! Meldingen er sendt, og du hører fra oss så snart vi kan.'
+    } catch {
+      status.innerHTML = 'Meldingen ble ikke sendt. ' + telefonSvar
+    } finally {
+      knapp.disabled = false
+      knapp.textContent = 'Send melding'
+    }
+  })
+</script>
