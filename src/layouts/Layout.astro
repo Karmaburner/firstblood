@@ -30,42 +30,63 @@ const currentPath = Astro.url.pathname
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600..900&family=Teko:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    #fb-img   { height: 4rem;  transform: translateY(-10px); }
-    #skull-img { transform: translate(10px, 7px); }
+    /* Logo: hodeskallen ligger bak teksten */
+    #fb-img    { height: 5.5rem; }
+    #skull-img { transform: translate(7px, 5px); }
     @media (min-width: 768px) {
-      #fb-img   { height: 9rem; transform: translateY(-35px); }
-      #skull-img { transform: translate(22px, 14px); }
+      #fb-img    { height: 7rem; }
+      #skull-img { transform: translate(9px, 6px); }
+    }
+    .meny-knapp {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      min-height: 44px; padding: 0.25rem 0.5rem;
+      color: var(--text); background: none; border: 0; cursor: pointer;
+      font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
+      font-size: 1.125rem; letter-spacing: 0.15em; line-height: 1;
+      opacity: 0.9; transition: opacity 0.2s;
+    }
+    .meny-knapp:hover { opacity: 1; }
+    .meny-knapp:focus-visible, #site-logo:focus-visible, .header-kontakt:focus-visible { outline: 3px solid #F0EBE0; outline-offset: 3px; }
+    .header-kontakt {
+      display: none; align-items: center; min-height: 44px; padding: 0.55rem 1.4rem 0.4rem;
+      font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
+      font-size: 1.125rem; letter-spacing: 0.12em; line-height: 1;
+      background: var(--accent-knapp); color: #fff; border-radius: 9999px; transition: background-color 0.15s;
+    }
+    .header-kontakt:hover { background: #B80006; }
+    .meny-lenke { display: none; }
+    @media (min-width: 768px) {
+      .header-kontakt, .meny-lenke { display: inline-flex; }
+      #menu-btn { display: none; }
     }
   </style>
   </head>
   <body class="flex flex-col min-h-screen">
     <header class="sticky top-0 z-50 border-b overflow-visible relative" style={`background-image: linear-gradient(to right, rgba(28,28,28,0.88) 0%, rgba(28,28,28,0.92) 10%, #000000 35%, #000000 60%, rgba(28,28,28,0.92) 90%, rgba(28,28,28,0.88) 100%), url('${u("/images/teppe.avif")}'); background-size: cover; background-position: center; border-color: var(--border);`}>
-      <!-- LOGO: posisjonert relativt til header (full bredde) -->
-      <a href={u("/")} id="site-logo" class="absolute inline-block" style="z-index: 10; top: 12px; left: calc(8px + 6vw); transform: translateX(-50%);">
-        <img src={u("/images/logo.avif")}                alt=""            class="absolute inset-0 w-full h-full object-contain pointer-events-none" id="skull-img" />
-        <img src={u("/images/first-blood-tekst.avif")} alt="First Blood" class="relative w-auto drop-shadow-2xl"                                              id="fb-img" />
-      </a>
-
-      <div class="max-w-5xl mx-auto px-6 h-24 md:h-44 flex flex-row items-center justify-end">
-        <a href={u("/kontakt")} class="hidden md:inline-flex items-center px-5 rounded-full font-medium text-sm transition-opacity hover:opacity-80" style="position: absolute; right: 9rem; font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 0.12em; background-color: var(--accent-knapp); color: #ffffff; line-height: 1; padding-top: 0.65rem; padding-bottom: 0.35rem;">Kontakt</a>
-        <a href={u("/meny")} class="hidden md:flex flex-col gap-1.5 p-2" style="position: absolute; right: 1.5rem; color: var(--text); opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
-          <svg width="64" height="64" viewBox="0 0 28 28" fill="currentColor">
-            <rect x="3" y="3" width="10" height="10" rx="2"/>
-            <rect x="15" y="3" width="10" height="10" rx="2"/>
-            <rect x="3" y="15" width="10" height="10" rx="2"/>
-            <rect x="15" y="15" width="10" height="10" rx="2"/>
-          </svg>
+      <div class="px-4 md:px-8 h-20 md:h-[6.5rem] flex items-center justify-between gap-4">
+        <a href={u("/")} id="site-logo" class="relative inline-block shrink-0">
+          <img src={u("/images/logo.avif")}           alt=""            class="absolute inset-0 w-full h-full object-contain pointer-events-none" id="skull-img" />
+          <img src={u("/images/first-blood-tekst.avif")} alt="First Blood, til forsiden" class="relative w-auto drop-shadow-2xl" id="fb-img" />
         </a>
-        <button id="menu-btn" class="md:hidden p-2" style="color: var(--text);" aria-label="Meny">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor">
-            <rect x="2" y="2" width="8" height="8" rx="1.5"/>
-            <rect x="12" y="2" width="8" height="8" rx="1.5"/>
-            <rect x="2" y="12" width="8" height="8" rx="1.5"/>
-            <rect x="12" y="12" width="8" height="8" rx="1.5"/>
-          </svg>
-        </button>
+        <div class="flex items-center gap-3 md:gap-6">
+          <a href={u("/kontakt")} class="header-kontakt">Kontakt</a>
+          <a href={u("/meny")} class="meny-knapp meny-lenke">
+            <svg width="36" height="36" viewBox="0 0 28 28" fill="currentColor" aria-hidden="true">
+              <rect x="3" y="3" width="10" height="10" rx="2"/><rect x="15" y="3" width="10" height="10" rx="2"/>
+              <rect x="3" y="15" width="10" height="10" rx="2"/><rect x="15" y="15" width="10" height="10" rx="2"/>
+            </svg>
+            Meny
+          </a>
+          <button id="menu-btn" type="button" class="meny-knapp" aria-expanded="false" aria-controls="mobile-menu">
+            <svg width="26" height="26" viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">
+              <rect x="2" y="2" width="8" height="8" rx="1.5"/><rect x="12" y="2" width="8" height="8" rx="1.5"/>
+              <rect x="2" y="12" width="8" height="8" rx="1.5"/><rect x="12" y="12" width="8" height="8" rx="1.5"/>
+            </svg>
+            Meny
+          </button>
+        </div>
       </div>
-      <div id="mobile-menu" class="hidden md:hidden border-t" style="background-color: var(--bg); border-color: var(--border);">
+      <div id="mobile-menu" class="hidden md:hidden border-t" style="background-color: #0A0A0A; border-color: var(--border);">
         <ul class="flex flex-col px-6 py-4 gap-4" style="font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase; font-size: 1.3rem; letter-spacing: 0.12em; color: #e8f4f8;">
           {nav.map(({ href, label }) => (
             <li>
@@ -115,7 +136,10 @@ const currentPath = Astro.url.pathname
     <script>
       const btn = document.getElementById('menu-btn')
       const menu = document.getElementById('mobile-menu')
-      btn?.addEventListener('click', () => menu?.classList.toggle('hidden'))
+      btn?.addEventListener('click', () => {
+        const aapen = menu?.classList.toggle('hidden') === false
+        btn.setAttribute('aria-expanded', String(aapen))
+      })
     </script>
 
 
