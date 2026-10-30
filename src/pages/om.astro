@@ -1,4 +1,5 @@
 ---
+import { u } from "../lib/url"
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -8,7 +9,7 @@ import Layout from '../layouts/Layout.astro'
       <div>
         <div class="overflow-hidden rounded-2xl aspect-[3/4] bg-stone-900 flex items-center justify-center">
           <img
-            src="/images/trond.avif"
+            src={u("/images/trond.avif")}
             alt="Trond Kjørkleiv — First Blood Tattoo"
             class="w-full h-full object-cover"
             onerror="this.style.display='none'"
@@ -16,11 +17,11 @@ import Layout from '../layouts/Layout.astro'
         </div>
       </div>
       <div>
-        <img src="/images/first-blood-tekst-alternativ.avif" alt="First Blood" class="w-auto mb-2 -mx-8" style="height: 14rem;" />
+        <img src={u("/images/first-blood-tekst-alternativ.avif")} alt="First Blood" class="w-auto mb-2 -mx-8" style="height: 14rem;" />
 
         <!-- Visittkort-kort -->
         <div class="inline-block mb-8 p-6 border-2 relative overflow-hidden" style="background-color: #0A0A0A; border-color: var(--accent); min-width: 460px; min-height: 280px;">
-          <img src="/images/bolger.avif" alt="" class="absolute w-full pointer-events-none" style="opacity: 1; bottom: -40px; left: 0; z-index: 0;" />
+          <img src={u("/images/bolger.avif")} alt="" class="absolute w-full pointer-events-none" style="opacity: 1; bottom: -40px; left: 0; z-index: 0;" />
           <h1 class="font-bold relative mt-0" style="color: #C8BFB0; font-family: 'Staatliches', sans-serif; font-size: clamp(2.2rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 0.75; z-index: 1;">Tr<span style="color: var(--accent);">o</span>nd<br/>Kjørkleiv</h1>
         </div>
         <!-- Google rating + tagline -->
@@ -84,7 +85,7 @@ import Layout from '../layouts/Layout.astro'
           </a>
         </div>
 
-        <a href="/kontakt" class="inline-flex items-center gap-2 mt-8 text-white px-6 py-3 rounded-full font-medium hover:opacity-85 transition-opacity" style="background-color: var(--accent-knapp);">
+        <a href={u("/kontakt")} class="inline-flex items-center gap-2 mt-8 text-white px-6 py-3 rounded-full font-medium hover:opacity-85 transition-opacity" style="background-color: var(--accent-knapp);">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           Ta kontakt
         </a>

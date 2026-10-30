@@ -1,11 +1,12 @@
 ---
+import { u } from "../lib/url"
 import '../styles/global.css'
 
 const nav = [
-  { href: '/',        label: 'Forside' },
-  { href: '/galleri', label: 'Galleri' },
-  { href: '/om',      label: 'Om' },
-  { href: '/kontakt', label: 'Kontakt' },
+  { href: u('/'),        label: 'Forside' },
+  { href: u('/galleri'), label: 'Galleri' },
+  { href: u('/om'),      label: 'Om' },
+  { href: u('/kontakt'), label: 'Kontakt' },
 ]
 ---
 
@@ -35,8 +36,8 @@ const nav = [
     <main>
       <div id="logo-col">
         <div class="inline-block" style="position: relative;">
-          <img src="/images/logo.avif" alt="" id="meny-skull-img" class="absolute inset-0 w-full h-full object-contain pointer-events-none" />
-          <img src="/images/first-blood-tekst.avif" alt="First Blood" id="meny-fb-img" class="relative w-auto drop-shadow-2xl" />
+          <img src={u("/images/logo.avif")} alt="" id="meny-skull-img" class="absolute inset-0 w-full h-full object-contain pointer-events-none" />
+          <img src={u("/images/first-blood-tekst.avif")} alt="First Blood" id="meny-fb-img" class="relative w-auto drop-shadow-2xl" />
         </div>
       </div>
 
