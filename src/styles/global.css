@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --accent: #C41E3A;
+  --accent: #F80008;        /* rødfargen i logoen */
+  --accent-knapp: #E00008;  /* samme rød, litt dypere, så hvit tekst får nok kontrast */
   --bg: #0a1628;
   --bg-secondary: #0d2a3e;
-  --border: #5a0f1a;
+  --border: #5c0003;
   --text: #e8f4f8;
   --muted: #7ab8cc;
 }
