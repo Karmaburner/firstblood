@@ -23,10 +23,13 @@ import { allImages } from '../data/images'
       <img src={u('/images/trond.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="760" height="956" fetchpriority="high" />
     </figure>
   </section>
+  <a href="#arbeider" class="rull-ned" aria-label="Se arbeidene">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+  </a>
   </div>
 
   <!-- Full-width gallery -->
-  <div class="columns-2 md:columns-3 lg:columns-5 gap-1 space-y-1 w-full">
+  <div id="arbeider" class="columns-2 md:columns-3 lg:columns-5 gap-1 space-y-1 w-full">
     {allImages.map(({ id, thumb, alt }) => (
       <button type="button" class="block w-full p-0 border-0 bg-transparent break-inside-avoid overflow-hidden cursor-zoom-in focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--knapp)]" aria-label={`Vis større: ${alt}`} onclick={`window.openLightbox('${id}')`}>
         <img src={thumb} alt="" class="block w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
@@ -45,7 +48,33 @@ import { allImages } from '../data/images'
       var(--teppe);
     background-size: cover;
     background-position: center;
+    position: relative;
   }
+
+  /* Liten markør nederst som viser at det er mer å se. Bare på store skjermer,
+     der heroen fyller hele skjermen. */
+  .rull-ned { display: none; }
+  @media (min-width: 900px) {
+    .rull-ned {
+      position: absolute; left: 50%; bottom: 1.25rem; transform: translateX(-50%);
+      display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; color: #C8BFB0;
+    }
+    .rull-ned svg { width: 36px; height: 36px; }
+    .rull-ned svg { animation: hopp 2.2s ease-in-out infinite; }
+    .rull-ned:hover { color: #F0EBE0; }
+    .rull-ned:focus-visible { outline: 3px solid #F0EBE0; outline-offset: 3px; }
+  }
+  @keyframes hopp {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rull-ned svg { animation: none; }
+  }
+  /* Galleriet havner under den faste headeren når man hopper dit */
+  #arbeider { scroll-margin-top: 6.5rem; }
+
   .hero {
     display: grid;
     gap: 2.5rem;
@@ -78,7 +107,8 @@ import { allImages } from '../data/images'
     color: #F0EBE0;
     margin-top: 0.75rem;
   }
-  .hero-tittel span { color: var(--accent); }
+  /* Andre linje mindre: «Vi tatoverer.» er hovedbudskapet, «Ingenting annet.» er punchlinen */
+  .hero-tittel span { display: inline-block; margin-top: 0.15em; font-size: 0.55em; letter-spacing: 0.04em; color: var(--accent); }
   .hero-ingress {
     font-size: 1.375rem;
     line-height: 1.4;

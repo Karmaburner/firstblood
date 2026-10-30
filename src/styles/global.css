@@ -13,7 +13,7 @@
   --bg-secondary: #0d2a3e;
   --border: #5c0003;
   --text: #e8f4f8;
-  --muted: #7ab8cc;
+  --muted: #A9A39A;         /* varm grå til etiketter */
 }
 
 @layer base {
