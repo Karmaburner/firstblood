@@ -20,7 +20,7 @@ import { allImages } from '../data/images'
       </div>
     </div>
     <figure class="hero-bilde">
-      <img src={u('/images/trond.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="1024" height="1280" fetchpriority="high" />
+      <img src={u('/images/trond-frilagt.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="1400" height="1050" fetchpriority="high" />
     </figure>
   </section>
   <a href="#arbeider" class="rull-ned" aria-label="Se arbeidene">
@@ -49,6 +49,7 @@ import { allImages } from '../data/images'
     background-size: cover;
     background-position: center;
     position: relative;
+    overflow: hidden; /* Trond går litt ut over kanten, uten sidelengs rulling */
   }
 
   /* Liten markør nederst som viser at det er mer å se. Bare på store skjermer,
@@ -85,7 +86,7 @@ import { allImages } from '../data/images'
   }
   @media (min-width: 900px) {
     .hero {
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
       gap: 4rem;
       min-height: calc(100svh - 6.5rem);
       padding: 3rem 2rem 4.5rem;
@@ -94,7 +95,6 @@ import { allImages } from '../data/images'
   /* Bredere skjermer: mer bredde til innholdet, så det ikke blir en smal stripe midt på */
   @media (min-width: 1400px) {
     .hero { max-width: 84rem; gap: 6rem; }
-    .hero .hero-bilde { max-width: 32rem; }
   }
   .hero-etikett {
     font-family: var(--font-overskrift); font-weight: 700; text-transform: uppercase;
@@ -111,6 +111,7 @@ import { allImages } from '../data/images'
     letter-spacing: 0.01em;
     color: #F0EBE0;
     margin-top: 0.75rem;
+    white-space: nowrap; /* «Vi tatoverer.» skal stå på én linje */
   }
   /* Andre linje mindre: «Vi tatoverer.» er hovedbudskapet, «Ingenting annet.» er punchlinen */
   /* Egen blokk med egen linjehøyde, ellers arver den luften fra den store linjen */
@@ -148,17 +149,32 @@ import { allImages } from '../data/images'
   /* Sekundærknapp: samme oker som omriss, som Kontakt i headeren */
   .knapp-kant { border: 2px solid var(--knapp); color: var(--knapp); }
   .knapp-kant:hover { background: var(--knapp); color: var(--knapp-tekst); }
+  /* Trond som frilagt lag: går ut til kantene og ned til bunnen, skjorten fader ut */
   .hero-bilde {
     position: relative;
-    margin: 0;
-    max-width: 27rem;
-    justify-self: center;
-    width: 100%;
+    z-index: 1;
+    margin: 0 -1.25rem -3.5rem;
+    pointer-events: none;
   }
   .hero-bilde img {
-    position: relative;
     display: block;
     width: 100%;
     height: auto;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 98%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 98%);
+  }
+  .hero-tekst { position: relative; z-index: 2; }
+  @media (min-width: 900px) {
+    .hero-bilde {
+      align-self: end;
+      /* Litt inn i mellomrommet til venstre og ut mot kanten til høyre, ned til bunnen */
+      margin: 0 -10rem -4.5rem -7rem;
+    }
+    .hero-bilde img {
+      -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 97%), linear-gradient(to right, transparent 0%, #000 14%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to bottom, #000 58%, transparent 97%), linear-gradient(to right, transparent 0%, #000 14%);
+      mask-composite: intersect;
+    }
   }
 </style>
