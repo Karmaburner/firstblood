@@ -6,7 +6,9 @@ import { allImages } from '../data/images'
 
 <Layout title="Forside">
 
-  <!-- Hero: budskap til venstre, Trond til høyre, to tydelige valg -->
+  <!-- Hero: budskap til venstre, Trond til høyre, to tydelige valg.
+       Bakgrunnen er samme mønster som i headeren, dempet så teksten får god kontrast. -->
+  <div class="hero-bakgrunn" style={`--teppe: url('${u('/images/teppe.avif')}')`}>
   <section class="hero">
     <div class="hero-tekst">
       <p class="hero-etikett">Tatoveringsstudio · Sandnes</p>
@@ -21,6 +23,7 @@ import { allImages } from '../data/images'
       <img src={u('/images/trond.avif')} alt="Trond Kjørkleiv med solbriller og sigar" width="760" height="956" fetchpriority="high" />
     </figure>
   </section>
+  </div>
 
   <!-- Full-width gallery -->
   <div class="columns-2 md:columns-3 lg:columns-5 gap-1 space-y-1 w-full">
@@ -35,6 +38,14 @@ import { allImages } from '../data/images'
 </Layout>
 
 <style>
+  .hero-bakgrunn {
+    background-image:
+      linear-gradient(to bottom, transparent 70%, #000 100%),
+      linear-gradient(to right, rgba(28,28,28,0.88) 0%, rgba(28,28,28,0.92) 10%, #000 35%, #000 60%, rgba(28,28,28,0.92) 90%, rgba(28,28,28,0.88) 100%),
+      var(--teppe);
+    background-size: cover;
+    background-position: center;
+  }
   .hero {
     display: grid;
     gap: 2.5rem;
@@ -104,15 +115,7 @@ import { allImages } from '../data/images'
     margin: 0;
     max-width: 26rem;
     justify-self: center;
-    width: calc(100% - 14px); /* plass til den røde rammen */
-    margin-right: 14px;
-  }
-  .hero-bilde::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    transform: translate(14px, 14px);
-    border: 2px solid var(--accent);
+    width: 100%;
   }
   .hero-bilde img {
     position: relative;
